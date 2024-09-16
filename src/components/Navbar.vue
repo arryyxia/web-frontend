@@ -1,5 +1,5 @@
 <template>
-    <nav class="shadow-md h-20">
+    <nav class="shadow-md h-20 fixed bg-white w-full top-0">
         <div class="flex justify-between px-5 items-center h-full">
             <div class="flex items-center gap-4">
                 <!-- Logo -->
@@ -15,14 +15,14 @@
                             </button>
 
                             <input type="text" placeholder="Search "
-                                class="w-full bg-transparent pl-4 pr-8 focus:outline-none xl:w-[500px]" />
+                                class="bg-transparent pl-4 pr-8 focus:outline-none xl:w-[500px]" />
                         </div>
                     </form>
                 </div>
             </div>
 
             <!-- Menus -->
-            <div class="flex gap-4 items-center">
+            <div class="lg:flex gap-4 items-center hidden">
                 <div class="" v-for="item in menuItems" :key="item.label">
                     <RouterLink :to="item.route" class="flex gap-2 items-center p-2 px-4 border-t-4 border-t-white transition-all font-medium text-lg rounded-sm hover:border-t-4 hover:border-t-[#DC2626] hover:text-[#DC2626]">
                         <i :class="item.icon"></i>
@@ -37,6 +37,25 @@
                     </div>
                 </RouterLink> -->
             </div>
+        </div>
+    </nav>
+
+    <nav class="shadow-md h-20 block lg:hidden fixed bg-white w-full bottom-0">
+        <!-- Menus -->
+        <div class="flex gap-4 items-center justify-around">
+            <div class="" v-for="item in menuItems" :key="item.label">
+                <RouterLink :to="item.route" class="flex flex-col gap-2 items-center p-2 px-4 border-t-4 border-t-white transition-all font-medium text-lg rounded-sm hover:border-t-4 hover:border-t-[#DC2626] hover:text-[#DC2626]">
+                    <i :class="item.icon" class="text-lg font-medium"></i>
+                    <h3 class="font-medium">{{item.label}}</h3>
+                </RouterLink>
+            </div>
+            <!-- <RouterLink to="/googleplay" class="flex items-center border-white border-2 gap-2 transition-all hover:border-[#DC2626] hover:border-2 p-2 px-5 rounded-md">
+                <img src="../assets/google-play-logo-png.webp" alt="google play" class="w-7">
+                <div class="flex flex-col gap-0">
+                    <p class="text-xs">Download it from</p>
+                    <p class="font-semibold">Google Play</p>
+                </div>
+            </RouterLink> -->
         </div>
     </nav>
 </template>

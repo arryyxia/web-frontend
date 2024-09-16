@@ -6,7 +6,7 @@
 
         <!-- Daftar Berita -->
         <RouterLink to="/berita" class="col-span-12 xl:col-span-3 flex items-center gap-3 border-none">
-            <h2 class="text-2xl font-medium text-[#181818]">Daftar Berita</h2>
+            <h2 class="text-2xl font-medium text-[#181818]">Berita Terkini</h2>
             <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
         </RouterLink>
         <div class="col-span-12 grid grid-cols-12 gap-4">
