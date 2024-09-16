@@ -27,6 +27,7 @@
                     <RouterLink :to="item.route" class="flex gap-2 items-center p-2 px-4 border-b-4 border-b-white transition-all font-medium text-lg rounded-sm hover:border-b-4 hover:border-b-[#DC2626] hover:text-[#DC2626]">
                         <i :class="item.icon"></i>
                         <h3 class="">{{item.label}}</h3>
+                        
                     </RouterLink>
                 </div>
                 <!-- <RouterLink to="/googleplay" class="flex items-center border-white border-2 gap-2 transition-all hover:border-[#DC2626] hover:border-2 p-2 px-5 rounded-md">
