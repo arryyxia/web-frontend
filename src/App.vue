@@ -2,7 +2,7 @@
     <ConfirmPopup class="max-lg:hidden" group="popup" />
     <ConfirmDialog class="lg:hidden" group="dialog" />
     <Toast class="max-lg:hidden"></Toast>
-	<div class="h-dvh">
+	<div class="h-dvh text-[#181818]">
 		<RouterView></RouterView>
 	</div>
 </template>

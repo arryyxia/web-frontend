@@ -3,7 +3,7 @@
         <div class="flex justify-between px-5 items-center h-full">
             <div class="flex items-center gap-4">
                 <!-- Logo -->
-                <RouterLink to="/" class="bg-color-none">
+                <RouterLink to="/" class="bg-color-none border-none">
                     <img src="../assets/logo-ikatek.png" alt="logo Ikatek" class="w-14">
                 </RouterLink>
 
