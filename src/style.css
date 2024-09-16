@@ -30,7 +30,7 @@
     }
 
     .router-link-active {
-        @apply color-primary rounded-sm border-t-4 border-t-[#DC2626] text-[#DC2626];
+        @apply color-primary rounded-sm border-b-4 border-b-[#DC2626] text-[#DC2626];
     }
     /* .router-link-exact-active {
         @apply font-medium color-primary bg-color-100 border-b-2 border-b-[#DC2626];
