@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'Berita',
+    name: 'List Event',
 
 }
 </script>

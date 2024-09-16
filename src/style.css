@@ -18,7 +18,7 @@
     }
 
     .color-primary {
-        color: var(--p-primary-500);
+        color: var(--p-primary-600);
     }
 
     .bg-color-100 {
@@ -30,8 +30,11 @@
     }
 
     .router-link-active {
-        @apply font-medium color-primary bg-color-100;
+        @apply color-primary rounded-sm border-t-4 border-t-[#DC2626] text-[#DC2626];
     }
+    /* .router-link-exact-active {
+        @apply font-medium color-primary bg-color-100 border-b-2 border-b-[#DC2626];
+    } */
     
     .menu:hover{
         @apply font-medium color-primary bg-color-100;
@@ -53,17 +56,17 @@
     -webkit-font-smoothing  : antialiased;
     -moz-osx-font-smoothing : grayscale;
 
-    --p-primary-50  : var(--p-blue-50);
-    --p-primary-100 : var(--p-blue-100);
-    --p-primary-200 : var(--p-blue-200);
-    --p-primary-300 : var(--p-blue-300);
-    --p-primary-400 : var(--p-blue-400);
-    --p-primary-500 : var(--p-blue-500);
-    --p-primary-600 : var(--p-blue-600);
-    --p-primary-700 : var(--p-blue-700);
-    --p-primary-800 : var(--p-blue-800);
-    --p-primary-900 : var(--p-blue-900);
-    --p-primary-950 : var(--p-blue-950);
+    --p-primary-50  : var(--p-red-50);
+    --p-primary-100 : var(--p-red-100);
+    --p-primary-200 : var(--p-red-200);
+    --p-primary-300 : var(--p-red-300);
+    --p-primary-400 : var(--p-red-400);
+    --p-primary-500 : var(--p-red-500);
+    --p-primary-600 : var(--p-red-600);
+    --p-primary-700 : var(--p-red-700);
+    --p-primary-800 : var(--p-red-800);
+    --p-primary-900 : var(--p-red-900);
+    --p-primary-950 : var(--p-red-950);
     
     --p-surface-0   : #ffffff;
     --p-surface-50  : #f8fafc;
