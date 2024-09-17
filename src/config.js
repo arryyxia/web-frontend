@@ -9,6 +9,13 @@ const config = {
             'accept': 'application/json',
         },
     },
+    local: {
+        baseURL: 'http://localhost:8000/api/',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'accept': 'application/json',
+        },
+    },
 }
 
 export default config[mode]

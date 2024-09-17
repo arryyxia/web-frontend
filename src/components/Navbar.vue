@@ -1,5 +1,5 @@
 <template>
-    <nav class="shadow-md h-20 fixed bg-white w-full top-0">
+    <nav class="shadow-md h-20 fixed bg-white w-full top-0 z-50">
         <div class="flex justify-between px-5 items-center h-full">
             <div class="flex items-center gap-4">
                 <!-- Logo -->
@@ -41,7 +41,7 @@
         </div>
     </nav>
 
-    <nav class="shadow-md h-20 block lg:hidden fixed bg-white w-full bottom-0">
+    <nav class="shadow-md h-20 block lg:hidden fixed bg-white w-full bottom-0 z-50">
         <!-- Menus -->
         <div class="flex gap-4 items-center justify-around">
             <div class="" v-for="item in menuItems" :key="item.label">

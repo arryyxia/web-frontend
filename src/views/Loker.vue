@@ -5,7 +5,7 @@
         </div>
         <div class="col-span-12 grid grid-cols-12 gap-4">
             <LokerCard v-for="item in items" :key="item.judul"
-                :mainlink       ="item.mainLink"
+                :linkLoker      ="item.linkLoker"
                 :img            ="item.img"
                 :judul          ="item.perusahaan"
                 :perusahaan     ="item.perusahaan"
@@ -26,7 +26,7 @@ export default {
         return {
             items: [
                 {
-                    mainLink    : "/dfsoajgioadjf",
+                    linkLoker   : "/dfsoajgioadjf",
                     img         : "https://antekhub.com/assets/logo-ikatek.PNG",
                     judul       : "Lorem ipsum dolor amet",
                     perusahaan  : "Fakultas Teknik Unhas",

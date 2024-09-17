@@ -1,7 +1,7 @@
 <template>
     <div class="shadow-md col-span-12 lg:col-span-6 rounded-lg bg-white">
         <RouterLink :to="mainLink" class="flex h-48">
-            <img class="rounded-l-lg w-2/6" :src="img" :alt="`gambar ${judul}`">
+            <Image :src="img" :alt="`Gambar dari berita ${judul}`" width="400" preview class="rounded-l-lg max-w-48 z-10" />
             <div class="p-5 min-w-0 grid grid-cols-1 content-between">
                 <div class="flex flex-col gap-3">
                     <h3 class="text-lg font-semibold truncate">{{ judul }}</h3>

@@ -23,6 +23,11 @@ const routes = [
     component: () => import('../views/Loker.vue')
   },
   {
+    path: '/detail',
+    name: 'detail',
+    component: () => import('../views/Detail.vue')
+  },
+  {
     path: '/coming-soon',
     name: 'coming-soon',
     component: () => import('../views/ComingSoon.vue')

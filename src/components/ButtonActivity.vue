@@ -1,9 +1,11 @@
 <template>
-    <RouterLink :to="activityLink" class="flex justify-end gap-2 text-black border-none">
-        <i class="text-2xl text-black" :class="activityIcon"></i>
-        <p class="text-black">
-            {{activityCount}}
-        </p>
+    <RouterLink :to="activityLink" class="flex justify-end">
+        <div class="flex justify-end gap-2 text-black border-none max-w-32 ">
+            <i class="text-2xl text-black" :class="activityIcon"></i>
+            <p class="text-black">
+                {{activityCount}}
+            </p>
+        </div>
     </RouterLink>
 </template>
 

@@ -1,10 +1,9 @@
 <template>
     <Layout>
         <!-- Daftar Event -->
-        <RouterLink to="/list-event" class="col-span-12 xl:col-span-3 flex items-center gap-3 border-none">
+        <div to="/list-event" class="col-span-12 xl:col-span-3 flex items-center gap-3 border-none">
             <h2 class="text-2xl font-medium text-[#181818]">Daftar Event</h2>
-            <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
-        </RouterLink>
+        </div>
         <div class="col-span-12 grid grid-cols-12 gap-4">
             <MainCard v-for="item in eventItems" :key="item.judul" 
                 :judul          ="item.judul" 
@@ -33,7 +32,7 @@ export default {
                     mainLink       : "/loker",
                     activityLink   : "/list-event",
                     activityCount  : "28",
-                    activityIcon   : "pi pi-heart",
+                    activityIcon   : "pi pi-users",
                 },
                 {
                     judul          : "Unhas Sheessshhh ldasjfl lksdaj fadsfj asdfs",
@@ -42,7 +41,7 @@ export default {
                     mainLink       : "/loker",
                     activityLink   : "/list-event",
                     activityCount  : "28",
-                    activityIcon   : "pi pi-heart",
+                    activityIcon   : "pi pi-users",
                 },
             ],
         }

@@ -1,6 +1,6 @@
 <template>
     <div class="shadow-md col-span-12 lg:col-span-6 rounded-lg bg-white">
-        <RouterLink :to="mainLink" class="h-48">
+        <RouterLink :to="linkLoker" class="h-48">
             <div class="flex flex-col gap-2 p-5">
                 <div class="flex items-center gap-4 pb-3 border-b">
                     <img :src="img" :alt="`Logo ${judul}`" class="w-20 h-20">
@@ -39,7 +39,7 @@
 export default {
     name: 'LokerCard',
     props: {
-        mainLink: {
+        linkLoker: {
             type: String,
             required: true,
         },
