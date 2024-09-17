@@ -5,7 +5,7 @@
                 <div class="flex items-center gap-4 pb-3 border-b">
                     <img :src="img" :alt="`Logo ${judul}`" class="w-20 h-20">
                     <div class="flex flex-col justify-center gap-2 border-b-gray-500">
-                        <h3 class="font-semibold text-xl line-clamp-2">{{ judul }}</h3>
+                        <h3 class="font-semibold text-xl line-clamp-2 text-[#181818]">{{ judul }}</h3>
                         <p class="uppercase text-gray-500 font-light">{{ perusahaan }}</p>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="pt-3 line-clamp-2">
-                    <p>{{ deskripsi }}</p>
+                    <p class="text-[#181818]">{{ deskripsi }}</p>
                 </div>
             </div>
         </RouterLink>
