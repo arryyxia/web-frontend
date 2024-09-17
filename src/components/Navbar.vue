@@ -27,17 +27,17 @@
                     <RouterLink :to="item.route" class="flex gap-2 items-center p-2 px-4 border-b-4 border-b-white transition-all font-medium text-lg rounded-sm hover:border-b-4 hover:border-b-[#DC2626] hover:text-[#DC2626]">
                         <i :class="item.icon"></i>
                         <h3 class="">{{item.label}}</h3>
-                        
+
                     </RouterLink>
                 </div>
-                <!-- <RouterLink to="/googleplay" class="flex items-center border-white border-2 gap-2 transition-all hover:border-[#DC2626] hover:border-2 p-2 px-5 rounded-md">
-                    <img src="../assets/google-play-logo-png.webp" alt="google play" class="w-7">
-                    <div class="flex flex-col gap-0">
-                        <p class="text-xs">Download it from</p>
-                        <p class="font-semibold">Google Play</p>
-                    </div>
-                </RouterLink> -->
             </div>
+            <RouterLink to="/googleplay" class="flex items-center border-2 gap-2 transition-all border-[#333] lg:hidden hover:border-2 p-2 px-5 rounded-md">
+                <img src="../assets/google-play-logo-png.webp" alt="google play" class="w-7">
+                <div class="flex flex-col gap-0">
+                    <p class="text-xs">Download it from</p>
+                    <p class="font-semibold">Google Play</p>
+                </div>
+            </RouterLink>
         </div>
     </nav>
 
@@ -45,8 +45,8 @@
         <!-- Menus -->
         <div class="flex gap-4 items-center justify-around">
             <div class="" v-for="item in menuItems" :key="item.label">
-                <RouterLink :to="item.route" class="flex flex-col gap-2 items-center p-2 px-4 border-t-4 border-t-white transition-all font-medium text-lg rounded-sm hover:border-t-4 hover:border-t-[#DC2626] hover:text-[#DC2626]">
-                    <i :class="item.icon" class="text-lg font-medium"></i>
+                <RouterLink :to="item.route" class="mobile w-24 flex flex-col gap-2 items-center pt-3 px-4 border-t-4 border-t-white transition-all font-medium text-lg rounded-sm hover:border-t-4 hover:border-t-[#DC2626] hover:text-[#DC2626]">
+                    <i :class="item.icon" class="text-2xl font-medium"></i>
                     <h3 class="font-medium">{{item.label}}</h3>
                 </RouterLink>
             </div>
@@ -62,9 +62,7 @@ export default {
                 { label: 'Beranda', icon: 'pi pi-home', route: '/' },
                 { label: 'Berita', icon: 'pi pi-briefcase', route: '/berita' },
                 { label: 'Loker', icon: 'pi pi-envelope', route: '/loker' },
-                { label: 'List Event', icon: 'pi pi-calendar-clock', route: '/list-event' },
-                // { label: 'Mentoring', icon: 'pi pi-graduation-cap', route: '/coming-soon' },
-                // { label: 'Kemitraan', icon: 'pi pi-', route: '/event' },
+                { label: 'Event', icon: 'pi pi-calendar-clock', route: '/list-event' },
             ]
         }
     }

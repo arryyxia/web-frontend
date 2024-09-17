@@ -1,10 +1,10 @@
 <template>
     <Layout>
         <!-- Daftar Berita -->
-        <RouterLink to="/berita" class="col-span-12 xl:col-span-3 flex items-center gap-3 border-none">
+        <div class="col-span-6 xl:col-span-3 flex items-center gap-3 border-none">
             <h2 class="text-2xl font-medium text-[#181818]">Daftar Berita</h2>
-            <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
-        </RouterLink>
+        </div>
+
         <div class="col-span-12 grid grid-cols-12 gap-4">
             <MainCard v-for="item in newsItems" :key="item.judul" 
                 :judul          ="item.judul" 
