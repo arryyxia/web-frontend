@@ -2,13 +2,15 @@
     <div class="shadow-md col-span-12 lg:col-span-6 rounded-lg bg-white">
         <RouterLink :to="linkLoker" class="h-48">
             <div class="flex flex-col gap-2 p-5">
+                <!-- Header -->
                 <div class="flex items-center gap-4 pb-3 border-b">
-                    <img :src="img" :alt="`Logo ${judul}`" class="w-20 h-20">
+                    <img :src="img" :alt="`Logo ${judul}`" class="w-20 h-20 rounded-md">
                     <div class="flex flex-col justify-center gap-2 border-b-gray-500">
                         <h3 class="font-semibold text-xl line-clamp-2 text-[#181818]">{{ judul }}</h3>
                         <p class="uppercase text-gray-500 font-light">{{ perusahaan }}</p>
                     </div>
                 </div>
+                <!-- Detail -->
                 <div class="flex text-gray-500 justify-between lg:justify-left gap-5 flex-wrap">
                     <div class="flex gap-2 items-center">
                         <i class="pi pi-briefcase"></i>
@@ -27,6 +29,7 @@
                         <span>{{ waktuTampil }}</span>
                     </div>
                 </div>
+                <!-- Deskripsi -->
                 <div class="pt-3 line-clamp-2">
                     <p class="text-[#181818]">{{ deskripsi }}</p>
                 </div>
