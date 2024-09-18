@@ -7,26 +7,30 @@ const routes = [
     name: 'home',
     component: () => import('../views/Home.vue')
   },
+  // ? BERITA
   {
     path: '/berita',
     name: 'berita',
     component: () => import('../views/Berita.vue')
   },
   {
+    path: '/berita/:slug',
+    name: 'berita',
+    component: () => import('../views/BeritaDetail.vue')
+  },
+  // ? Event
+  {
     path: '/list-event',
     name: 'list-event',
     component: () => import('../views/ListEvent.vue')
   },
+  // ? Loker
   {
     path: '/loker',
     name: 'loker',
     component: () => import('../views/Loker.vue')
   },
-  {
-    path: '/detail',
-    name: 'detail',
-    component: () => import('../views/Detail.vue')
-  },
+  // Coming soon
   {
     path: '/coming-soon',
     name: 'coming-soon',

@@ -10,24 +10,29 @@
             <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
         </RouterLink>
         <div class="col-span-12 grid grid-cols-12 gap-4">
-            <MainCard v-for="item in newsItems" :key="item.judul" 
-                :judul          ="item.judul" 
-                :deskripsi      ="item.deskripsi" 
-                :img            ="item.img" 
-                :mainLink       ="item.mainLink" 
-                :activityLink   ="item.activityLink"
-                :activityCount  ="item.activityCount"
-                :activityIcon   ="item.activityIcon"
-            ></MainCard>
-        </div>
+            <!-- SKELETON -->
+            <div v-if="isLoading" class="col-span-12 grid grid-cols-12 gap-4">
+                <div v-for="item in newsSkeleton" :key="item" 
+                    class="shadow-md col-span-12 lg:col-span-6 grid grid-cols-12 rounded-lg bg-white">
+                    <div class="col-span-3 rounded-l-lg z-10">
+                        <Skeleton width="100%" height="12rem"></Skeleton>
+                    </div>
+                    <div class="col-span-9 h-48">
+                        <div class="p-5 min-w-0 h-full flex flex-col justify-between">
+                            <div class="flex flex-col gap-3">
+                                <div class="flex flex-col gap-2">
+                                    <Skeleton width="100%" height="1.5rem"></Skeleton>
+                                    <Skeleton width="100%" height="1.5rem"></Skeleton>
+                                </div>
+                                <Skeleton width="100%" height="5.5rem"></Skeleton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Daftar Berita -->
-        <RouterLink to="/berita" class="col-span-6 xl:col-span-3 flex items-center gap-3 border-none">
-            <h2 class="text-2xl font-medium text-[#181818]">Berita Terkini</h2>
-            <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
-        </RouterLink>
-        <div class="col-span-12 grid grid-cols-12 gap-4">
-            <MainCard v-for="item in newsSigma" :key="item.judul" 
+            <!-- BODY -->
+            <MainCard v-else v-for="item in newsItems" :key="item.judul"
                 :judul          ="item.judul" 
                 :deskripsi      ="item.deskripsi" 
                 :img            ="this.default.img + item.gambar" 
@@ -65,18 +70,9 @@ export default {
     inject: ['default'],
     data() {
         return {
-            newsItems : [
-                {
-                    judul          : "Modi provident illo consectetur quidem velit quisquam vitae",
-                    deskripsi      : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi provident illo consectetur quidem velit quisquam vitae, voluptas exercitationem? Consequatur autem iure cum, delectus in ex soluta impedit! Quam, vel consectetur.",
-                    img            : "https://img.freepik.com/free-vector/line-background-wave-gradient-template-design_483537-5079.jpg?w=1480&t=st=1726493302~exp=1726493902~hmac=94c3cf406a115e740b099714508873d60778fa319355370eaefb391ca827be26",
-                    mainLink       : "/jfa",
-                    activityLink   : "/list-event",
-                    activityCount  : "28",
-                    activityIcon   : "pi pi-heart",
-                },
-            ],
-            newsSigma: [],
+            isLoading: true,
+            newsItems: [],
+            newsSkeleton: 3, // ? defaultnya 4
             lokerItems: [
                 {
                     linkLoker    : "/sadfja",
@@ -98,7 +94,11 @@ export default {
     methods: {
         getNews () {
             axios.get('/public/berita')
-                .then(data => this.newsSigma = (data.data.data.data))
+                .then(
+                    data => {this.newsItems = (data.data.data.data);
+                    this.newsSkeleton   = this.newsItems.length;
+                    this.isLoading      = false;
+            })
         }
     },
     mounted() {
