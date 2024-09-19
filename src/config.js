@@ -3,7 +3,7 @@ const mode = 'main'
 
 const config = {
     main: {
-        baseURL: 'https://api.antekhub.com/api/',
+        baseURL: 'https://api.antekhub.com/api/public',
         headers: {
             'Access-Control-Allow-Origin': '*',
             'accept': 'application/json',

@@ -135,24 +135,25 @@ export default {
         title() {
             let targetTitle = document.querySelector('title');
             let changeTo    = targetTitle.text + 'Home'; 
-            targetTitle = changeTo;
-            console.log()
+            targetTitle     = changeTo;
         },
         getLoker () {
-            axios.get('/public/loker?limit=4')
+            axios.get('loker?limit=4')
                 .then(
-                    data => {this.lokerItems = (data.data.data.data);
+                    response => {this.lokerItems = (response.data.data.data);
+                    console.log(this.lokerItems.length);
                     this.lokerSkeletons = this.lokerItems.length;
                     this.lokerIsloading = false;
-            })
+                })
         },
         getNews () {
-            axios.get('/public/berita')
+            axios.get('berita')
                 .then(
-                    data => {this.beritaItems = (data.data.data.data);
+                    response => {this.beritaItems = (response.data.data.data);
+                    console.log(this.beritaItems.length);
                     this.beritaSkeletons    = this.beritaItems.length;
                     this.beritaIsLoading    = false;
-            })
+                })
         }
     },
     mounted() {
