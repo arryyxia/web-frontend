@@ -15,11 +15,21 @@
 
         <!-- Berita Kategori -->
         <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3">
-            <Kategori v-for="kategori in kategoriItems" :key="kategori.slug"
-                :namaKategori   =kategori.kategori
-                :slugKategori   =kategori.slug
-                @pilihKategori  ="() => pilihKategori(kategori.slug)"
-            ></Kategori>
+            <!-- <Kategori v-for="kategori in kategoriItems" :key="kategori.slug"
+                :namaKategori   = kategori.kategori
+                :endpointBerita = kategori.slug
+                :isSelected		= isSelected
+                @pilihKategori  = "() => pilihKategori(kategori.slug)"
+            ></Kategori> -->
+			<Kategori 
+				v-for="kategori in kategoriItems" 
+				:key="kategori.slug"
+				:namaKategori="kategori.kategori"
+				:endpointBerita="kategori.slug"
+				:urlKategori="`berita?kategori=${kategori.slug}`"
+				:isSelected="selectedCategory === kategori.slug"
+				@pilihKategori	=	"() => pilihKategori(kategori.slug)"
+			></Kategori>
         </div>
 
         <!-- Content -->
@@ -47,13 +57,13 @@
 
             <!-- MAIN -->
             <MainCard v-else v-for="item in beritaItems" :key="item.judul"
-                :judul          ="item.judul" 
-                :deskripsi      ="item.deskripsi" 
-                :img            ="this.default.img + item.gambar" 
-                :mainLink       ="`berita/${item.slug}`" 
-                activityLink    ="/loker"
-                :activityCount  ="item.total_like"
-                activityIcon    ="pi pi-heart"
+                :judul			="item.judul" 
+                :deskripsi		="item.deskripsi" 
+                :img			="this.default.img + item.gambar" 
+                :mainLink		="`berita/${item.slug}`" 
+                activityLink	="/loker"
+                :activityCount	="item.total_like"
+                activityIcon	="pi pi-heart"
             ></MainCard>
         </div>
 
@@ -95,15 +105,15 @@
 
             <!-- MAIN -->
             <LokerCard v-for="item in lokerItems" :key="item.judul"
-                :judul          ="item.judul"
-                :linkLoker      ="`loker/${item.slug}`"
-                :img            ="this.default.img + item.perusahaan.logo"
-                :perusahaan     ="item.perusahaan.nama_perusahaan"
-                :role           ="item.role"
-                :lokasi         ="item.lokasi"
-                :pengalaman     ="`Tahun ${item.pengalaman_kerja}`"
-                :waktuTampil    ="item.tgl_selesai"
-                :deskripsi      ="item.deskripsi"
+                :judul			="item.judul"
+                :linkLoker		="`loker/${item.slug}`"
+                :img			="this.default.img + item.perusahaan.logo"
+                :perusahaan		="item.perusahaan.nama_perusahaan"
+                :role			="item.role"
+                :lokasi			="item.lokasi"
+                :pengalaman		="`Tahun ${item.pengalaman_kerja}`"
+                :waktuTampil	="item.tgl_selesai"
+                :deskripsi		="item.deskripsi"
             ></LokerCard>
 
         </div>
@@ -121,12 +131,14 @@ export default {
             beritaItems     : [],
             beritaSkeletons : 4,
             beritaIsLoading : true,
+            endpointBerita  : 'berita',
+            endDef			: 'berita',
 
             // ? Kategori
-            kategoriItems   : [],
-            kategoriSkeletons : 4,
-            kategoriIsLoading : true,
-            slugKategori     : 'berita',
+            kategoriItems       : [],
+            kategoriSkeletons   : 4,
+            kategoriIsLoading   : true,
+            isSelected          : null,
 
             // ? Loker
             lokerItems      : [],
@@ -147,7 +159,7 @@ export default {
             })
         },
         getBerita() {
-            axios.get(`${this.slugKategori}`).then(response => {
+            axios.get(`${this.endpointBerita}`).then(response => {
                 this.beritaItems = (response.data.data.data);
                 console.log('hai')
                 console.log(this.beritaItems)
@@ -160,13 +172,22 @@ export default {
                 this.kategoriIsLoading = false;
             })
         },
-        pilihKategori(slug) {
-            this.slugKategori = 'berita?kategori=' + slug;
-            this.$nextTick(() => {
-                this.getBerita();
-                console.log(this.slugKategori);
-            });
-        }
+        // pilihKategori(slug) {
+		// 	if ( this.isSelected ) {
+		// 		this.endpointBerita = this.endDef;
+	    //         this.isSelected = !this.isSelected;
+		// 		this.getBerita();
+		// 	} else {
+		// 		this.endpointBerita = 'berita?kategori=' + slug;
+	    //         this.isSelected = !this.isSelected;
+        //     	this.getBerita();
+		// 	}
+        // },
+		pilihKategori(slug) {
+			this.selectedCategory = this.selectedCategory === slug ? null : slug; // Toggle selection
+			this.endpointBerita = this.selectedCategory ? 'berita?kategori=' + slug : this.endDef; // Update endpoint based on selection
+			this.getBerita(); // Fetch berita based on selected category
+		},
     },
     mounted() {
         this.getLoker();
