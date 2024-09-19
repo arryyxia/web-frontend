@@ -26,7 +26,7 @@
                     </div>
                     <div class="flex gap-2 items-center">
                         <i class="pi pi-calendar"></i>
-                        <span>{{ waktuTampil }}</span>
+                        <span>{{ `${hitungHari(waktuTampil)} hari lagi` }}</span>
                     </div>
                 </div>
                 <!-- Deskripsi -->
@@ -78,10 +78,20 @@ export default {
             type: String,
             required: true,
         },
-    }
+    },
+    methods: {
+        hitungHari(tgl_selesai) {
+            const nowDate = new Date();
+            const endDate = new Date(tgl_selesai);
+
+            const timeDiff = endDate - nowDate;
+            const dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+            return dayDiff > 0 ? dayDiff : 0; 
+        },
+    },
 }
 </script>
 
 <style>
-
 </style>

@@ -34,7 +34,7 @@
                 :deskripsi      ="item.deskripsi" 
                 :img            ="this.default.img + item.gambar" 
                 :mainLink       ="`berita/${item.slug}`" 
-                activityLink    ="/playstore"
+                activityLink    ="/"
                 :activityCount  ="item.total_like"
                 activityIcon    ="pi pi-heart"
             ></MainCard>

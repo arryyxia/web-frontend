@@ -31,6 +31,14 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-span-12 bg-white shadow-md rounded-md p-3 flex justify-center gap-4">
+                    <Skeleton width="4rem" height="2rem"></Skeleton>
+                    <Skeleton width="2rem" height="2rem"></Skeleton>
+                    <Skeleton width="2rem" height="2rem"></Skeleton>
+                    <Skeleton width="2rem" height="2rem"></Skeleton>
+                    <Skeleton width="4rem" height="2rem"></Skeleton>
+                </div>
             </div>
 
             <!-- MAIN -->
@@ -43,13 +51,13 @@
                     :role           ="item.role"
                     :lokasi         ="item.lokasi"
                     :pengalaman     ="`Tahun ${item.pengalaman_kerja}`"
-                    :waktuTampil    ="`Hari ${item.tgl_selesai} Lagi`"
+                    :waktuTampil    ="item.tgl_selesai"
                     :deskripsi      ="item.deskripsi"
                 ></LokerCard>
 
-                <div class="col-span-12 bg-white shadow-md rounded-md p-3">
+                <div class="col-span-12 bg-white shadow-md rounded-md p-3 flex justify-center gap-4">
                     <div v-for="item in lokerItems.links" :key="item.label">
-                        <RouterLink>{{ item.label }}</RouterLink>
+                        <button @click="changePage(item.url)" v-html="item.label" class="bg-red-600 text-center p-1 px-3 rounded-md text-white"></button>
                     </div>
                 </div>
 
@@ -66,21 +74,24 @@ export default {
     data() {
         return {
             // ? Loker
-            endpointLoker   : 'https://api.antekhub.com/api/public/loker?page=1&limit=4',
+            endpointLoker   : 'https://api.antekhub.com/api/public/loker?page=1&limit=6',
             lokerItems      : [],
             pagination      : [],
-            lokerSkeletons  : 4,
+            lokerSkeletons  : 6,
             lokerIsloading  : true,
         }
     },
     methods: {
+        changePage (newEndpoint) {
+            this.endpointLoker = newEndpoint + '&limit=6';
+            this.getLoker();
+        },
         getLoker () {
             axios.get(this.endpointLoker)
                 .then(
                     response => { 
                         const lokerData = (response.data.data);
                         this.lokerItems     = lokerData;
-                        this.endpointLoker  = lokerData.links + '&limit=4';
                         this.lokerIsloading = false;
                 })
         },

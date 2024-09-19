@@ -1,4 +1,5 @@
 // TODO Carousel Event
+// TODO GANTI ACTIVITY LINK
 
 <template>
     <Layout>
@@ -13,7 +14,13 @@
         </RouterLink>
 
         <!-- Berita Kategori -->
-        <Kategori></Kategori>
+        <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3">
+            <Kategori v-for="kategori in kategoriItems" :key="kategori.slug"
+                :namaKategori   = kategori.kategori
+                :slugKategori   = kategori.slug
+                @pilihKategori  = pilihKategori(kategori.slug)
+            ></Kategori>
+        </div>
 
         <!-- Content -->
         <div class="col-span-12 grid grid-cols-12 gap-4">
@@ -44,7 +51,7 @@
                 :deskripsi      ="item.deskripsi" 
                 :img            ="this.default.img + item.gambar" 
                 :mainLink       ="`berita/${item.slug}`" 
-                activityLink    ="/playstore"
+                activityLink    ="/loker"
                 :activityCount  ="item.total_like"
                 activityIcon    ="pi pi-heart"
             ></MainCard>
@@ -95,7 +102,7 @@
                 :role           ="item.role"
                 :lokasi         ="item.lokasi"
                 :pengalaman     ="`Tahun ${item.pengalaman_kerja}`"
-                :waktuTampil    ="`Hari ${item.tgl_selesai} Lagi`"
+                :waktuTampil    ="item.tgl_selesai"
                 :deskripsi      ="item.deskripsi"
             ></LokerCard>
 
@@ -110,10 +117,16 @@ export default {
     inject: ['default'],
     data() {
         return {
-            // ? News
+            // ? Berita
             beritaItems     : [],
             beritaSkeletons : 4,
             beritaIsLoading : true,
+
+            // ? Kategori
+            kategoriItems   : [],
+            kategoriSkeletons : 4,
+            kategoriIsLoading : true,
+            slugKategori     : 'berita',
 
             // ? Loker
             lokerItems      : [],
@@ -121,39 +134,41 @@ export default {
             lokerIsloading  : true,
         }
     },
-    computed: {
-        hitungHari(tgl_selesai) {
-            const nowDate   = new Date()
-            const endDate   = new Date(tgl_selesai);
-
-            const timeDiff  = endDate - nowDate;
-            const dayDiff   = Math.ceil(timeDiff / (1000 * 60 *60 * 24))
-
-            return dayDiff > 0 ? dayDiff : 0;
-        },
-    },
     methods: {
         title() {
             let targetTitle = document.querySelector('title');
             let changeTo    = targetTitle.text + 'Home'; 
             targetTitle     = changeTo;
         },
-        getLoker () {
+        getLoker() {
             axios.get('loker?limit=4').then(response => {
                 this.lokerItems = (response.data.data.data);
                 this.lokerIsloading = false;
             })
         },
-        getBerita () {
-            axios.get('berita').then(response => {
+        getBerita() {
+            axios.get(this.slugKategori).then(response => {
                 this.beritaItems = (response.data.data.data);
-                this.beritaIsLoading    = false;
+                console.log('hai')
+                this.beritaIsLoading = false;
             })
+        },
+        getKategori() {
+            axios.get('kategori').then(response => {
+                this.kategoriItems = this.kategoriItems = (response.data.data);
+                this.kategoriIsLoading = false;
+            })
+        },
+        pilihKategori(slug) {
+            this.slugKategori = 'berita?kategori=' + slug;
+            this.getBerita();
+            console.log(this.slugKategori);
         }
     },
     mounted() {
         this.getLoker();
         this.getBerita();
+        this.getKategori();
         this.title();
     },
 }
