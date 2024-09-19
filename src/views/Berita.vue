@@ -26,6 +26,14 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-span-12 bg-white shadow-md rounded-md p-3 flex justify-center gap-4">
+                    <Skeleton width="4rem" height="2rem"></Skeleton>
+                    <Skeleton width="2rem" height="2rem"></Skeleton>
+                    <Skeleton width="2rem" height="2rem"></Skeleton>
+                    <Skeleton width="2rem" height="2rem"></Skeleton>
+                    <Skeleton width="4rem" height="2rem"></Skeleton>
+                </div>
             </div>
 
             <!-- MAIN -->
@@ -50,17 +58,16 @@ export default {
         return {
             // ? News
             beritaItems     : [],
-            beritaSkeletons : 4,
+            beritaSkeletons : 6,
             beritaIsLoading : true,
         }
     },
     methods: {
         getBerita () {
-            axios.get('berita')
-                .then(
-                    response => {this.beritaItems = (response.data.data.data);
-                    this.beritaIsLoading    = false;
-                })
+            axios.get('berita').then(response => {
+                this.beritaItems = (response.data.data.data);
+                this.beritaIsLoading    = false;
+            })
         }
     },
     mounted() {

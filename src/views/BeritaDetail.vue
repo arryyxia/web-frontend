@@ -6,16 +6,15 @@
             <Skeleton width="100%" height="2.5rem"></Skeleton>
             <Skeleton width="50%" height="2.5rem"></Skeleton>
             <Skeleton width="7rem" height="1.5rem"></Skeleton>
-            <Skeleton width="7rem" height="1.5rem"></Skeleton>
+            <Skeleton width="15rem" height="1.5rem"></Skeleton>
 
             <div class="bg-white shadow-md p-5 rounded-lg flex flex-col items-center gap-6 w-full">
                 <Skeleton width="50%" height="25rem"></Skeleton>
-                <img :src="this.default.img + konten.gambar" alt="">
-                <div v-html="konten.konten" class="flex flex-col gap-3"></div>
+                <Skeleton width="100%" height="50rem"></Skeleton>
             </div>
         </div>
 
-        <div class="col-span-12 text-center">
+        <div v-else class="col-span-12 text-center">
             <!-- static -->
             <p class="text-lg font-semibold text-red-600">Berita</p>
             <h2 class="text-3xl font-semibold">{{konten.judul}}</h2>

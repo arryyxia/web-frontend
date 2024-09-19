@@ -59,6 +59,7 @@
                     <div v-for="item in lokerItems.links" :key="item.label">
                         <button @click="changePage(item.url)" v-html="item.label" class="bg-red-600 text-center p-1 px-3 rounded-md text-white"></button>
                     </div>
+                    <Paginator :rows="6" :totalRecords="120" :rowsPerPageOptions="[10, 20, 30]"></Paginator>
                 </div>
 
             </div>

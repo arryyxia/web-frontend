@@ -172,17 +172,6 @@ export default {
                 this.kategoriIsLoading = false;
             })
         },
-        // pilihKategori(slug) {
-		// 	if ( this.isSelected ) {
-		// 		this.endpointBerita = this.endDef;
-	    //         this.isSelected = !this.isSelected;
-		// 		this.getBerita();
-		// 	} else {
-		// 		this.endpointBerita = 'berita?kategori=' + slug;
-	    //         this.isSelected = !this.isSelected;
-        //     	this.getBerita();
-		// 	}
-        // },
 		pilihKategori(slug) {
 			this.selectedCategory = this.selectedCategory === slug ? null : slug; // Toggle selection
 			this.endpointBerita = this.selectedCategory ? 'berita?kategori=' + slug : this.endDef; // Update endpoint based on selection
