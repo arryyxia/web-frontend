@@ -5,17 +5,39 @@
             <h2 class="text-2xl font-medium text-[#181818]">Daftar Berita</h2>
         </div>
 
+        <!-- Content -->
         <div class="col-span-12 grid grid-cols-12 gap-4">
-            <MainCard v-for="item in newsItems" :key="item.judul" 
+
+            <!-- SKELETON -->
+            <div v-if="beritaIsLoading" class="col-span-12 grid grid-cols-12 gap-4">
+                <div v-for="item in beritaSkeletons" :key="item" 
+                    class="shadow-md col-span-12 lg:col-span-6 grid grid-cols-12 rounded-lg bg-white">
+                    <div class="col-span-3 rounded-l-lg z-10">
+                        <Skeleton width="100%" height="12rem"></Skeleton>
+                    </div>
+                    <div class="col-span-9 h-48">
+                        <div class="p-5 min-w-0 h-full flex flex-col justify-between">
+                            <div class="flex flex-col gap-3">
+                                <div class="flex flex-col gap-2">
+                                    <Skeleton width="100%" height="3rem"></Skeleton>
+                                </div>
+                                <Skeleton width="100%" height="5.5rem"></Skeleton>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAIN -->
+            <MainCard v-else v-for="item in beritaItems" :key="item.judul"
                 :judul          ="item.judul" 
                 :deskripsi      ="item.deskripsi" 
-                :img            ="item.img" 
-                :mainLink       ="item.mainLink" 
-                :activityLink   ="item.activityLink"
-                :activityCount  ="item.activityCount"
-                :activityIcon   ="item.activityIcon"
-            >
-            </MainCard>
+                :img            ="this.default.img + item.gambar" 
+                :mainLink       ="`berita/${item.slug}`" 
+                activityLink    ="/playstore"
+                :activityCount  ="item.total_like"
+                activityIcon    ="pi pi-heart"
+            ></MainCard>
         </div>
     </Layout>
 </template>
@@ -23,29 +45,26 @@
 <script>
 export default {
     name: 'Berita',
+    inject: ['default'],
     data() {
         return {
-            newsItems : [
-                {
-                    judul          : "Unhas Sheessshhh ldasjfl lksdaj fadsfj asdfs",
-                    deskripsi      : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi provident illo consectetur quidem velit quisquam vitae, voluptas exercitationem? Consequatur autem iure cum, delectus in ex soluta impedit! Quam, vel consectetur.",
-                    img            : "https://img.freepik.com/free-vector/line-background-wave-gradient-template-design_483537-5079.jpg?w=1480&t=st=1726493302~exp=1726493902~hmac=94c3cf406a115e740b099714508873d60778fa319355370eaefb391ca827be26",
-                    mainLink       : "/loker",
-                    activityLink   : "/list-event",
-                    activityCount  : "28",
-                    activityIcon   : "pi pi-heart",
-                },
-                {
-                    judul          : "Unhas Sheessshhh ldasjfl lksdaj fadsfj asdfs",
-                    deskripsi      : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi provident illo consectetur quidem velit quisquam vitae, voluptas exercitationem? Consequatur autem iure cum, delectus in ex soluta impedit! Quam, vel consectetur.",
-                    img            : "https://img.freepik.com/free-vector/line-background-wave-gradient-template-design_483537-5079.jpg?w=1480&t=st=1726493302~exp=1726493902~hmac=94c3cf406a115e740b099714508873d60778fa319355370eaefb391ca827be26",
-                    mainLink       : "/loker",
-                    activityLink   : "/list-event",
-                    activityCount  : "28",
-                    activityIcon   : "pi pi-heart",
-                },
-            ],
+            // ? News
+            beritaItems     : [],
+            beritaSkeletons : 4,
+            beritaIsLoading : true,
         }
+    },
+    methods: {
+        getBerita () {
+            axios.get('berita')
+                .then(
+                    response => {this.beritaItems = (response.data.data.data);
+                    this.beritaIsLoading    = false;
+                })
+        }
+    },
+    mounted() {
+        this.getBerita()
     },
 }
 </script>

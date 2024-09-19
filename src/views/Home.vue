@@ -5,12 +5,15 @@
 
         <!-- Carousel Event -->
 
-        <!-- Daftar Berita -->
+        <!-- Daftar Berita -->        
         <!-- Title -->
         <RouterLink to="/berita" class="col-span-6 xl:col-span-3 flex items-center gap-3 border-none">
             <h2 class="text-2xl font-medium text-[#181818]">Berita Terkini</h2>
             <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
         </RouterLink>
+
+        <!-- Berita Kategori -->
+        <Kategori></Kategori>
 
         <!-- Content -->
         <div class="col-span-12 grid grid-cols-12 gap-4">
@@ -107,8 +110,6 @@ export default {
     inject: ['default'],
     data() {
         return {
-            // ? Status Fetch
-
             // ? News
             beritaItems     : [],
             beritaSkeletons : 4,
@@ -138,32 +139,25 @@ export default {
             targetTitle     = changeTo;
         },
         getLoker () {
-            axios.get('loker?limit=4')
-                .then(
-                    response => {this.lokerItems = (response.data.data.data);
-                    console.log(this.lokerItems.length);
-                    this.lokerSkeletons = this.lokerItems.length;
-                    this.lokerIsloading = false;
-                })
+            axios.get('loker?limit=4').then(response => {
+                this.lokerItems = (response.data.data.data);
+                this.lokerIsloading = false;
+            })
         },
-        getNews () {
-            axios.get('berita')
-                .then(
-                    response => {this.beritaItems = (response.data.data.data);
-                    console.log(this.beritaItems.length);
-                    this.beritaSkeletons    = this.beritaItems.length;
-                    this.beritaIsLoading    = false;
-                })
+        getBerita () {
+            axios.get('berita').then(response => {
+                this.beritaItems = (response.data.data.data);
+                this.beritaIsLoading    = false;
+            })
         }
     },
     mounted() {
         this.getLoker();
-        this.getNews();
+        this.getBerita();
         this.title();
     },
 }
 </script>
 
 <style>
-
 </style>

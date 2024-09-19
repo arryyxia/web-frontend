@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/berita/:slug',
-    name: 'berita',
+    name: 'berita-detail',
     component: () => import('../views/BeritaDetail.vue')
   },
   // ? Event
@@ -24,11 +24,21 @@ const routes = [
     name: 'list-event',
     component: () => import('../views/ListEvent.vue')
   },
+  {
+    path: '/list-event/:slug',
+    name: 'event-detail',
+    component: () => import('../views/ListEvent.vue')
+  },
   // ? Loker
   {
     path: '/loker',
     name: 'loker',
     component: () => import('../views/Loker.vue')
+  },
+  {
+    path: '/loker/:slug',
+    name: 'loker-detail',
+    component: () => import('../views/LokerDetail.vue')
   },
   // Coming soon
   {
