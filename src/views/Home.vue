@@ -16,9 +16,9 @@
         <!-- Berita Kategori -->
         <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3">
             <Kategori v-for="kategori in kategoriItems" :key="kategori.slug"
-                :namaKategori   = kategori.kategori
-                :slugKategori   = kategori.slug
-                @pilihKategori  = pilihKategori(kategori.slug)
+                :namaKategori   =kategori.kategori
+                :slugKategori   =kategori.slug
+                @pilihKategori  ="() => pilihKategori(kategori.slug)"
             ></Kategori>
         </div>
 
@@ -147,9 +147,10 @@ export default {
             })
         },
         getBerita() {
-            axios.get(this.slugKategori).then(response => {
+            axios.get(`${this.slugKategori}`).then(response => {
                 this.beritaItems = (response.data.data.data);
                 console.log('hai')
+                console.log(this.beritaItems)
                 this.beritaIsLoading = false;
             })
         },
@@ -161,8 +162,10 @@ export default {
         },
         pilihKategori(slug) {
             this.slugKategori = 'berita?kategori=' + slug;
-            this.getBerita();
-            console.log(this.slugKategori);
+            this.$nextTick(() => {
+                this.getBerita();
+                console.log(this.slugKategori);
+            });
         }
     },
     mounted() {
