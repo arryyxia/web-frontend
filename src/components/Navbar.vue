@@ -62,7 +62,7 @@ export default {
                 { label: 'Beranda', icon: 'pi pi-home', route: '/' },
                 { label: 'Berita', icon: 'pi pi-briefcase', route: '/berita' },
                 { label: 'Loker', icon: 'pi pi-envelope', route: '/loker' },
-                { label: 'Event', icon: 'pi pi-calendar-clock', route: '/list-event' },
+                { label: 'Event', icon: 'pi pi-calendar-clock', route: '/event' },
             ]
         }
     }

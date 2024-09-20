@@ -20,14 +20,14 @@ const routes = [
   },
   // ? Event
   {
-    path: '/list-event',
-    name: 'list-event',
-    component: () => import('../views/ListEvent.vue')
+    path: '/event',
+    name: 'event',
+    component: () => import('../views/Event.vue')
   },
   {
-    path: '/list-event/:slug',
+    path: '/event/:slug',
     name: 'event-detail',
-    component: () => import('../views/ListEvent.vue')
+    component: () => import('../views/EventDetail.vue')
   },
   // ? Loker
   {
