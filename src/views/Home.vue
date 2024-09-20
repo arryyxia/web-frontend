@@ -8,19 +8,19 @@
 
         <!-- Daftar Berita -->        
         <!-- Title -->
-        <RouterLink to="/berita" class="col-span-6 xl:col-span-3 flex items-center gap-3 border-none">
-            <h2 class="text-2xl font-medium text-[#181818]">Berita Terkini</h2>
-            <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
-        </RouterLink>
+        <div class="col-span-12">
+            <RouterLink to="/berita" class="w-full lg:w-52 flex items-center gap-3 border-none">
+                <h2 class="text-2xl font-medium text-[#181818]">Berita Terkini</h2>
+                <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
+            </RouterLink>
+        </div>
 
         <!-- Berita Kategori -->
-        <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3">
-            <!-- <Kategori v-for="kategori in kategoriItems" :key="kategori.slug"
-                :namaKategori   = kategori.kategori
-                :endpointBerita = kategori.slug
-                :isSelected		= isSelected
-                @pilihKategori  = "() => pilihKategori(kategori.slug)"
-            ></Kategori> -->
+
+        <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3 no-scrollbar">
+            <div v-if="kategoriIsLoading" class="col-span-12 flex gap-4">
+                <Skeleton v-for="item in kategoriSkeletons" :key="item" width="10rem" height="3rem"></Skeleton>
+            </div>
 			<Kategori 
 				v-for="kategori in kategoriItems" 
 				:key="kategori.slug"
@@ -33,46 +33,46 @@
         </div>
 
         <!-- Content -->
-        <div class="col-span-12 grid grid-cols-12 gap-4">
 
-            <!-- SKELETON -->
-            <div v-if="beritaIsLoading" class="col-span-12 grid grid-cols-12 gap-4">
-                <div v-for="item in beritaSkeletons" :key="item" 
-                    class="shadow-md col-span-12 lg:col-span-6 grid grid-cols-12 rounded-lg bg-white">
-                    <div class="col-span-3 rounded-l-lg z-10">
-                        <Skeleton width="100%" height="12rem"></Skeleton>
-                    </div>
-                    <div class="col-span-9 h-48">
-                        <div class="p-5 min-w-0 h-full flex flex-col justify-between">
-                            <div class="flex flex-col gap-3">
-                                <div class="flex flex-col gap-2">
-                                    <Skeleton width="100%" height="3rem"></Skeleton>
-                                </div>
-                                <Skeleton width="100%" height="5.5rem"></Skeleton>
+        <!-- SKELETON -->
+        <div v-if="beritaIsLoading" class="col-span-12 grid grid-cols-12 gap-4">
+            <div v-for="item in beritaSkeletons" :key="item" 
+                class="shadow-md col-span-12 lg:col-span-6 grid grid-cols-12 rounded-lg bg-white">
+                <div class="col-span-3 rounded-l-lg z-10">
+                    <Skeleton width="100%" height="12rem"></Skeleton>
+                </div>
+                <div class="col-span-9 h-48">
+                    <div class="p-5 min-w-0 h-full flex flex-col justify-between">
+                        <div class="flex flex-col gap-3">
+                            <div class="flex flex-col gap-2">
+                                <Skeleton width="100%" height="3rem"></Skeleton>
                             </div>
+                            <Skeleton width="100%" height="5.5rem"></Skeleton>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- MAIN -->
-            <MainCard v-else v-for="item in beritaItems" :key="item.judul"
-                :judul			="item.judul" 
-                :deskripsi		="item.deskripsi" 
-                :img			="this.default.img + item.gambar" 
-                :mainLink		="`berita/${item.slug}`" 
-                activityLink	="/loker"
-                :activityCount	="item.total_like"
-                activityIcon	="pi pi-heart"
-            ></MainCard>
         </div>
+
+        <!-- MAIN -->
+        <MainCard v-else v-for="item in beritaItems" :key="item.judul"
+            :judul			="item.judul" 
+            :deskripsi		="item.deskripsi" 
+            :img			="this.default.img + item.gambar" 
+            :mainLink		="`berita/${item.slug}`" 
+            activityLink	="/loker"
+            :activityCount	="item.total_like"
+            activityIcon	="pi pi-heart"
+        ></MainCard>
 
         <!-- Daftar Loker -->
         <!-- Title -->
-        <RouterLink to="/loker" class="col-span-6 xl:col-span-3 flex items-center gap-3 border-none">
-            <h2 class="text-2xl font-medium text-[#181818]">Daftar Loker</h2>
-            <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
-        </RouterLink>
+        <div class="col-span-12">
+            <RouterLink to="/loker" class="w-full lg:w-52 flex items-center gap-3 border-none">
+                <h2 class="text-2xl font-medium text-[#181818]">Daftar Loker</h2>
+                <i class="pi pi-arrow-right text-xl text-[#181818]"></i>
+            </RouterLink>
+        </div>
 
         <!-- Content -->
         <div class="col-span-12 grid grid-cols-12 gap-4">
@@ -136,7 +136,7 @@ export default {
 
             // ? Kategori
             kategoriItems       : [],
-            kategoriSkeletons   : 4,
+            kategoriSkeletons   : 6,
             kategoriIsLoading   : true,
             isSelected          : null,
 
