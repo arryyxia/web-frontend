@@ -1,6 +1,6 @@
 <template>
     <button :to="urlKategori"  @click="$emit('pilihKategori')"
-        class="text-black border-2 border-red-600 p-3 whitespace-nowrap rounded-md item-kategori"
+        class="text-black border-2 border-red-600 p-3 whitespace-nowrap rounded-md item-kategori transition-all"
         :class="{ 'bg-red-600 text-white': isSelected }"
     >
         <p>

@@ -31,7 +31,7 @@
                     </RouterLink>
                 </div>
             </div>
-            <RouterLink to="/" class="flex items-center border-2 gap-2 transition-all border-[#333] lg:hidden hover:border-2 p-2 px-5 rounded-md">
+            <RouterLink to="/berita" class="flex items-center border-2 gap-2 transition-all border-[#333] lg:hidden hover:border-2 p-2 px-5 rounded-md">
                 <img src="../assets/google-play-logo-png.webp" alt="google play" class="w-7">
                 <div class="flex flex-col gap-0">
                     <p class="text-xs">Download it from</p>

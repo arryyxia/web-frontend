@@ -5,6 +5,21 @@
     <Layout>
 
         <!-- Carousel Event -->
+        <div class="col-span-12">
+            <Galleria :value="eventItems" :showIndicators="true" containerStyle="max-width: 100%" :showThumbnails="false">
+                <template #item="slotProps">
+                    <img :src="this.default.img + slotProps.item.gambar" :alt="slotProps.item.alt" style="width: 100%; display: block" />
+                </template>
+                <template #caption="slotProps">
+                    <div class="text-xl mb-2 font-bold">{{ slotProps.item.peserta }}</div>
+                    <p class="text-white">{{ slotProps.item.alt }}</p>
+                </template>
+            </Galleria>
+        </div>
+
+        <div v-if="eventIsLoading" class="col-span-12">
+            <Skeleton width="100%" height="35rem"></Skeleton>
+        </div>
 
         <!-- Daftar Berita -->        
         <!-- Title -->
@@ -17,7 +32,7 @@
 
         <!-- Berita Kategori -->
 
-        <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3 no-scrollbar">
+        <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3">
             <div v-if="kategoriIsLoading" class="col-span-12 flex gap-4">
                 <Skeleton v-for="item in kategoriSkeletons" :key="item" width="10rem" height="3rem"></Skeleton>
             </div>
@@ -127,6 +142,10 @@ export default {
     inject: ['default'],
     data() {
         return {
+            // ? Event
+            eventItems  : [],
+            eventIsLoading: true,
+            
             // ? Berita
             beritaItems     : [],
             beritaSkeletons : 4,
@@ -139,6 +158,7 @@ export default {
             kategoriSkeletons   : 6,
             kategoriIsLoading   : true,
             isSelected          : null,
+            selectedCategory          : null,
 
             // ? Loker
             lokerItems      : [],
@@ -161,15 +181,19 @@ export default {
         getBerita() {
             axios.get(`${this.endpointBerita}`).then(response => {
                 this.beritaItems = (response.data.data.data);
-                console.log('hai')
-                console.log(this.beritaItems)
                 this.beritaIsLoading = false;
             })
         },
         getKategori() {
             axios.get('kategori').then(response => {
-                this.kategoriItems = this.kategoriItems = (response.data.data);
+                this.kategoriItems = (response.data.data);
                 this.kategoriIsLoading = false;
+            })
+        },
+        getEvent() {
+            axios.get('event').then(response => {
+                this.eventItems = (response.data.data.data);
+                this.eventIsLoading = false;
             })
         },
 		pilihKategori(slug) {
@@ -182,10 +206,8 @@ export default {
         this.getLoker();
         this.getBerita();
         this.getKategori();
+        this.getEvent();
         this.title();
     },
 }
 </script>
-
-<style>
-</style>

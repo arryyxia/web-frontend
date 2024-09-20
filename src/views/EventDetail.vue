@@ -16,7 +16,7 @@
 
         <div v-else class="col-span-12 text-center">
             <!-- static -->
-            <p class="text-lg font-semibold text-red-600">Berita</p>
+            <p class="text-lg font-semibold text-red-600">Event</p>
             <h2 class="text-3xl font-semibold">{{konten.judul}}</h2>
             <p class="text-lg font-normal">{{ konten.penulis }}</p>
             <p class="text-lg font-normal">{{ konten.created_at }}</p>

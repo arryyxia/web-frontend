@@ -17,6 +17,7 @@ import 'primeicons/primeicons.css'
 // ? baseURL yang di dapatkan dari config.js
 import axios from 'axios'
 import config from './config'
+
 axios.defaults.baseURL = config.baseURL;
 axios.defaults.headers.common = {
     ...axios.defaults.headers.common,
