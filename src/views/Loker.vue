@@ -1,5 +1,6 @@
 <template>
     <Layout>
+        <!-- Loker -->
         <div class="col-span-6 xl:col-span-3 flex items-center gap-3 border-none">
             <h2 class="text-2xl font-medium text-[#181818]">Lowongan Kerja</h2>
         </div>
@@ -55,7 +56,7 @@
                     :deskripsi      ="item.deskripsi"
                 ></LokerCard>
 
-                <!-- Pagination with PrimeVue -->
+                <!-- Pagination -->
                 <div class="col-span-12 bg-white shadow-md rounded-md p-3 flex justify-center">
                     <Paginator
                         :first="first"
@@ -70,6 +71,7 @@
         </div>
     </Layout>
 </template>
+
 <script>
 export default {
     name: 'Loker',
@@ -77,11 +79,13 @@ export default {
     data() {
         return {
             // ? Loker
-            endpointLoker   : 'https://api.antekhub.com/api/public/loker?limit=6',
             lokerItems      : [],
-            pagination      : [],
+            endpointLoker   : 'https://api.antekhub.com/api/public/loker?limit=6',
             lokerSkeletons  : 6,
             lokerIsloading  : true,
+
+            // Pagination
+            pagination      : [],
             totalRecords    : 0,
             first           : 1,
             rows            : 6,
@@ -89,24 +93,23 @@ export default {
         }
     },
     methods: {
-        changePage (page) {
-            const newPage = page + 1;
-            this.endpointLoker = `https://api.antekhub.com/api/public/loker?page=${newPage}&limit=${this.rows}`;
-            this.getLoker();
-        },
         getLoker () {
             axios.get(this.endpointLoker).then(response => { 
-                const lokerData = (response.data.data);
-                this.lokerItems     = lokerData;
-                this.totalRecords   = lokerData.total
+                this.lokerItems     = (response.data.data);
+                this.totalRecords   = this.lokerItems.total
                 this.lokerIsloading = false;
             }).catch(err => {
                 console.log(err)
             });
         },
+        changePage (page) {
+            const newPage = page + 1;
+            this.endpointLoker = `https://api.antekhub.com/api/public/loker?page=${newPage}&limit=${this.rows}`;
+            this.getLoker();
+        },
         onPageChange(event) {
-            this.first = event.first;
-            this.rows = event.rows;
+            this.first  = event.first;
+            this.rows   = event.rows;
             this.changePage(event.page);
         }
     },

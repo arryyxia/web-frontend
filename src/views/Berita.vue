@@ -6,7 +6,7 @@
         </div>
 
         <!-- Content -->
-        <div class="col-span-12 grid grid-cols-12 gap-4">
+        <div class="col-span-12 grid grid-cols-12">
 
             <!-- SKELETON -->
             <div v-if="beritaIsLoading" class="col-span-12 grid grid-cols-12 gap-4">
@@ -37,15 +37,29 @@
             </div>
 
             <!-- MAIN -->
-            <MainCard v-else v-for="item in beritaItems" :key="item.judul"
-                :judul          ="item.judul" 
-                :deskripsi      ="item.deskripsi" 
-                :img            ="this.default.img + item.gambar" 
-                :mainLink       ="`berita/${item.slug}`" 
-                activityLink    ="/"
-                :activityCount  ="item.total_like"
-                activityIcon    ="pi pi-heart"
-            ></MainCard>
+            <div v-else class="col-span-12 grid grid-cols-12 gap-4">
+                <MainCard v-for="item in beritaItems" :key="item.judul"
+                    :judul          ="item.judul" 
+                    :deskripsi      ="item.deskripsi" 
+                    :img            ="this.default.img + item.gambar" 
+                    :mainLink       ="`berita/${item.slug}`" 
+                    activityLink    ="/"
+                    :activityCount  ="item.total_like"
+                    activityIcon    ="pi pi-heart"
+                ></MainCard>
+
+                <!-- Pagination -->
+                <div class="col-span-12 bg-white shadow-md rounded-md p-3 flex justify-center">
+                    <Paginator
+                        :first="first"
+                        :rows="rows"
+                        :totalRecords="totalRecords"
+                        :rowsPerPageOptions="[6, 10, 20]"
+                        @page="onPageChange"
+                    />
+                </div>
+            </div>
+
         </div>
     </Layout>
 </template>
@@ -58,16 +72,37 @@ export default {
         return {
             // ? News
             beritaItems     : [],
+            endpointBerita  : 'https://api.antekhub.com/api/public/berita?limit=6',
             beritaSkeletons : 6,
             beritaIsLoading : true,
+
+            // Pagination
+            pagination      : [],
+            totalRecords    : 0,
+            first           : 1,
+            rows            : 6,
+            pageLinks       : 2,
         }
     },
     methods: {
         getBerita () {
-            axios.get('berita').then(response => {
-                this.beritaItems = (response.data.data.data);
+            axios.get(this.endpointBerita).then(response => {
+                this.beritaItems        = (response.data.data.data);
+                this.totalRecords       = response.data.data.total
                 this.beritaIsLoading    = false;
-            })
+            }).catch(err => {
+                console.log(err)
+            });
+        },
+        changePage (page) {
+            const newPage = page + 1;
+            this.endpointBerita = `https://api.antekhub.com/api/public/berita?page=${newPage}&limit=${this.rows}`;
+            this.getBerita();
+        },
+        onPageChange(event) {
+            this.first  = event.first;
+            this.rows   = event.rows;
+            this.changePage(event.page);
         }
     },
     mounted() {
