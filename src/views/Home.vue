@@ -277,8 +277,8 @@ export default {
     polygon{
         display: none;
     }
-    polyline {
-        color: red;
+    rect {
+        display: none;
     }
     /* polyline:hover{
         stroke: #DC2626;

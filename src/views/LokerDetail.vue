@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div v-else class="col-span-12 text-center gap-5">
+        <div v-else class="col-span-12 text-center flex flex-col gap-2">
             <!-- title -->
             <p class="text-lg font-semibold text-red-600">Lowongan Kerja</p>
             <h2 class="text-3xl font-semibold">{{ konten.judul }}</h2>
@@ -23,7 +23,7 @@
             <p class="text-lg font-normal">{{ convertDate(konten.created_at) }}</p> <!-- Format the date here -->
 
             <!-- Detail -->
-            <div class="flex text-gray-500 justify-between lg:justify-left gap-5 flex-wrap">
+            <div class="flex text-gray-500 justify-around lg:justify-left gap-5 flex-wrap">
                 <div class="flex gap-2 items-center">
                     <i class="pi pi-briefcase"></i>
                     <span>{{ konten.role }}</span>
