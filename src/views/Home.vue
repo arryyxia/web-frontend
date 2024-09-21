@@ -8,29 +8,30 @@
         <div v-if="eventIsLoading" class="col-span-12">
             <Skeleton width="100%" height="35rem"></Skeleton>
         </div>
-
+        
         <div v-else class="col-span-12">
-            <Galleria :value="eventItems" :showIndicators="true" containerStyle="max-width: 100%" :showThumbnails="false" :autoPlay="true" class="transition-all">
-                <template #item="slotProps">
-                    <img :src="this.default.img + slotProps.item.gambar" :alt="slotProps.item.alt" style="width: 100%; display: block" />
+            <VueFlux
+                :options="options"
+                :rscs="rscs"
+                :transitions="transitions"
+                ref="vueFlux"
+            >
+                <template #controls="controlsProps">
+                    <FluxControls v-bind="controlsProps" />
                 </template>
-                <template #caption="slotProps">
-                    <RouterLink :to="`event/${slotProps.item.slug}`" class="h-full flex justify-between">
-                        <div class="text-xl mb-2 font-bold bg-red-600 h-36 p-5 flex flex-col justify-center items-center rounded-full text-white">
-                            <p>{{ slotProps.item.peserta }}</p> 
-                            <p>Jumlah Peserta</p>
-                        </div>
-                        <div class="text-xl mb-2 font-bold bg-red-600 h-36 p-5 flex flex-col justify-center items-center rounded-full">
-                            <p>{{ slotProps.item.peserta }}</p> 
-                            <p>Jumlah Peserta</p>
-                        </div>
-                    </RouterLink>
+
+                <template #pagination="paginationProps">
+                    <FluxPagination v-bind="paginationProps" />
                 </template>
-            </Galleria>
+
+                <template #index="indexProps">
+                    <FluxIndex v-bind="indexProps" />
+                </template>
+            </VueFlux>
         </div>
 
 
-        <!-- Daftar Berita -->        
+        <!-- Daftar Berita -->
         <!-- Title -->
         <div class="col-span-12">
             <RouterLink to="/berita" class="w-full lg:w-52 flex items-center gap-3 border-none">
@@ -40,7 +41,6 @@
         </div>
 
         <!-- Berita Kategori -->
-
         <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3">
             <div v-if="kategoriIsLoading" class="col-span-12 flex gap-4">
                 <Skeleton v-for="item in kategoriSkeletons" :key="item" width="10rem" height="3rem"></Skeleton>
@@ -146,11 +146,38 @@
 </template>
 
 <script>
+import {
+  VueFlux,
+  FluxCaption,
+  FluxControls,
+  FluxIndex,
+  FluxPagination,
+  FluxPreloader,
+  Img,
+  Slide,
+} from 'vue-flux';
+
 export default {
-    name: 'Home',
-    inject: ['default'],
+  name: 'Home',
+  inject: ['default'],
+  components: {
+    VueFlux,
+    FluxCaption,
+    FluxControls,
+    FluxIndex,
+    FluxPagination,
+    FluxPreloader,
+  },
     data() {
         return {
+            // Flux slide
+            $vueFlux: null,
+            options: {
+                autoplay: true,
+            },
+            rscs: [],
+            transitions: [Slide],
+
             // ? Event
             eventItems  : [],
             eventIsLoading: true,
@@ -196,20 +223,25 @@ export default {
                 console.log(err)
             });
         },
+        getEvent() {
+            axios.get('event').then(response => {
+                this.eventItems = response.data.data.data;
+                this.eventIsLoading = false;
+
+                // Map eventItems to rscs for VueFlux
+                this.rscs = this.eventItems.map(item => 
+                    markRaw(new Img(this.default.img + item.gambar, item.alt || 'Event Image'))
+                );
+            }).catch(err => {
+                console.log(err);
+            });
+        },
         getKategori() {
             axios.get('kategori').then(response => {
                 if (response.data.data) {
                     this.kategoriItems = (response.data.data);
                     this.kategoriIsLoading = false;
                 }
-            }).catch(err => {
-                console.log(err)
-            });
-        },
-        getEvent() {
-            axios.get('event').then(response => {
-                this.eventItems = (response.data.data.data);
-                this.eventIsLoading = false;
             }).catch(err => {
                 console.log(err)
             });
@@ -236,4 +268,26 @@ export default {
         top: 0;
         height: 100%;
     }
+    circle{
+        display: none;
+    }
+    .pause{
+        display: none;
+    }
+    polygon{
+        display: none;
+    }
+    polyline {
+        color: red;
+    }
+    /* polyline:hover{
+        stroke: #DC2626;
+    }
+    .flux-button:hover>svg line, .flux-button:hover>svg plyline{
+        stroke: #DC2626;
+    }
+    .flux-button:hover>svg stroke:line,.flux-button:hover>svg polyline {
+        stroke: #DC2626;
+        
+    } */
 </style>

@@ -13,6 +13,8 @@ import ConfirmationService from 'primevue/confirmationservice';
 import ToastService from 'primevue/toastservice';
 import 'primeicons/primeicons.css'
 
+import 'vue-flux/style.css';
+
 // ? Melakuakn import axios dan menggunakan 
 // ? baseURL yang di dapatkan dari config.js
 import axios from 'axios'
