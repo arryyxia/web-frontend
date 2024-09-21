@@ -5,8 +5,12 @@
     <Layout>
 
         <!-- Carousel Event -->
-        <div class="col-span-12">
-            <Galleria :value="eventItems" :showIndicators="true" containerStyle="max-width: 100%" :showThumbnails="false">
+        <div v-if="eventIsLoading" class="col-span-12">
+            <Skeleton width="100%" height="35rem"></Skeleton>
+        </div>
+
+        <div v-else class="col-span-12">
+            <Galleria :value="eventItems" :showIndicators="true" containerStyle="max-width: 100%" :showThumbnails="false" :autoPlay="true" class="transition-all">
                 <template #item="slotProps">
                     <img :src="this.default.img + slotProps.item.gambar" :alt="slotProps.item.alt" style="width: 100%; display: block" />
                 </template>
@@ -17,9 +21,6 @@
             </Galleria>
         </div>
 
-        <div v-if="eventIsLoading" class="col-span-12">
-            <Skeleton width="100%" height="35rem"></Skeleton>
-        </div>
 
         <!-- Daftar Berita -->        
         <!-- Title -->
@@ -211,3 +212,7 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+
+</style>
