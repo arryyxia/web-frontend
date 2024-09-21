@@ -7,6 +7,7 @@
 
         <!-- Content -->
         <div class="col-span-12 grid grid-cols-12 gap-4">
+
             <!-- SKELETON -->
             <div v-if="eventIsLoading" class="col-span-12 grid grid-cols-12 gap-4">
                 <div v-for="item in eventSkeletons" :key="item" 
@@ -36,7 +37,7 @@
             </div>
 
             <!-- MAIN -->
-            <div class="col-span-12 grid grid-cols-12 gap-4">
+            <div v-else class="col-span-12 grid grid-cols-12 gap-4">
                 <MainCard v-for="item in eventItems" :key="item.judul" 
                     :judul          ="item.judul" 
                     :deskripsi      ="item.deskripsi" 
@@ -48,9 +49,20 @@
                     activityIcon   ="pi pi-users"
                 >
                 </MainCard>
+
+                <!-- Pagination -->
+                <div class="col-span-12 bg-white shadow-md rounded-md p-3 flex justify-center">
+                    <Paginator
+                        :first="first"
+                        :rows="rows"
+                        :totalRecords="totalRecords"
+                        :rowsPerPageOptions="[6, 10, 20]"
+                        @page="onPageChange"
+                    />
+                </div>
             </div>
+
         </div>
-        
     </Layout>
 </template>
 
@@ -60,17 +72,39 @@ export default {
     inject: ['default'],
     data() {
         return {
+            // ? Event
             eventItems      : [],
+            endpointEvent   : 'https://api.antekhub.com/api/public/event?limit=6',
             eventSkeletons  : 6,
-            eventIsLoading  : true
+            eventIsLoading  : true,
+
+            // Pagination
+            pagination      : [],
+            totalRecords    : 0,
+            first           : 1,
+            rows            : 6,
+            pageLinks       : 2,
         }
     },
     methods: {
         getEvent() {
             axios.get('event').then(response => {
-                this.eventItems     = (response.data.data.data);
+                this.eventItems     = (response.data.data.data)
+                this.totalRecords   = (response.data.data.total)
                 this.eventIsLoading = false;
-            })
+            }).catch(err => {
+                console.log(err)
+            });
+        },
+        changePage (page) {
+            const newPage = page + 1;
+            this.endpointBerita = `https://api.antekhub.com/api/public/event?page=${newPage}&limit=${this.rows}`;
+            this.getBerita();
+        },
+        onPageChange(event) {
+            this.first  = event.first;
+            this.rows   = event.rows;
+            this.changePage(event.page);
         }
     },
     mounted() {
