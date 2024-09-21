@@ -67,10 +67,8 @@ export default {
                 .then(response => {
                     this.konten = response.data.data
                     this.dataIsLoading = false;
-                })
-                .catch(error => {
-                    console.error("There was an error fetching the details:", error);
-                    this.dataIsLoading = false; // Handle loading state in case of error
+                }).catch(err => {
+                    console.log(err)
                 });
         },
         hitungHari(tgl_selesai) {

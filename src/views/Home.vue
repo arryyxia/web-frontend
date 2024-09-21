@@ -15,8 +15,16 @@
                     <img :src="this.default.img + slotProps.item.gambar" :alt="slotProps.item.alt" style="width: 100%; display: block" />
                 </template>
                 <template #caption="slotProps">
-                    <div class="text-xl mb-2 font-bold">{{ slotProps.item.peserta }}</div>
-                    <p class="text-white">{{ slotProps.item.alt }}</p>
+                    <RouterLink :to="`event/${slotProps.item.slug}`" class="h-full flex justify-between">
+                        <div class="text-xl mb-2 font-bold bg-red-600 h-36 p-5 flex flex-col justify-center items-center rounded-full text-white">
+                            <p>{{ slotProps.item.peserta }}</p> 
+                            <p>Jumlah Peserta</p>
+                        </div>
+                        <div class="text-xl mb-2 font-bold bg-red-600 h-36 p-5 flex flex-col justify-center items-center rounded-full">
+                            <p>{{ slotProps.item.peserta }}</p> 
+                            <p>Jumlah Peserta</p>
+                        </div>
+                    </RouterLink>
                 </template>
             </Galleria>
         </div>
@@ -38,12 +46,12 @@
                 <Skeleton v-for="item in kategoriSkeletons" :key="item" width="10rem" height="3rem"></Skeleton>
             </div>
 			<Kategori 
-				v-for="kategori in kategoriItems" 
-				:key="kategori.slug"
-				:namaKategori="kategori.kategori"
-				:endpointBerita="kategori.slug"
-				:urlKategori="`berita?kategori=${kategori.slug}`"
-				:isSelected="selectedCategory === kategori.slug"
+				v-for           ="kategori in kategoriItems" 
+				:key            ="kategori.slug"
+				:namaKategori   ="kategori.kategori"
+				:endpointBerita ="kategori.slug"
+				:urlKategori    ="`berita?kategori=${kategori.slug}`"
+				:isSelected     ="selectedCategory === kategori.slug"
 				@pilihKategori	=	"() => pilihKategori(kategori.slug)"
 			></Kategori>
         </div>
@@ -152,14 +160,13 @@ export default {
             beritaSkeletons : 4,
             beritaIsLoading : true,
             endpointBerita  : 'berita',
-            endDef			: 'berita',
 
             // ? Kategori
             kategoriItems       : [],
             kategoriSkeletons   : 6,
             kategoriIsLoading   : true,
             isSelected          : null,
-            selectedCategory          : null,
+            selectedCategory    : null,
 
             // ? Loker
             lokerItems      : [],
@@ -177,30 +184,40 @@ export default {
             axios.get('loker?limit=4').then(response => {
                 this.lokerItems = (response.data.data.data);
                 this.lokerIsloading = false;
-            })
+            }).catch(err => {
+                console.log(err)
+            });
         },
         getBerita() {
             axios.get(`${this.endpointBerita}`).then(response => {
                 this.beritaItems = (response.data.data.data);
                 this.beritaIsLoading = false;
-            })
+            }).catch(err => {
+                console.log(err)
+            });
         },
         getKategori() {
             axios.get('kategori').then(response => {
-                this.kategoriItems = (response.data.data);
-                this.kategoriIsLoading = false;
-            })
+                if (response.data.data) {
+                    this.kategoriItems = (response.data.data);
+                    this.kategoriIsLoading = false;
+                }
+            }).catch(err => {
+                console.log(err)
+            });
         },
         getEvent() {
             axios.get('event').then(response => {
                 this.eventItems = (response.data.data.data);
                 this.eventIsLoading = false;
-            })
+            }).catch(err => {
+                console.log(err)
+            });
         },
 		pilihKategori(slug) {
-			this.selectedCategory = this.selectedCategory === slug ? null : slug; // Toggle selection
-			this.endpointBerita = this.selectedCategory ? 'berita?kategori=' + slug : this.endDef; // Update endpoint based on selection
-			this.getBerita(); // Fetch berita based on selected category
+			this.selectedCategory   = this.selectedCategory === slug ? null : slug;
+			this.endpointBerita     = this.selectedCategory ? 'berita?kategori=' + slug : 'berita';
+			this.getBerita();
 		},
     },
     mounted() {
@@ -213,6 +230,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+    .p-galleria-caption {
+        background: none;
+        top: 0;
+        height: 100%;
+    }
 </style>

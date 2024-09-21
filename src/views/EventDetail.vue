@@ -42,11 +42,12 @@ export default {
     methods: {
         // ? Fetch data
         getDetail() {
-            axios.get('/event/' + this.$route.params.slug)
-                .then(response => {
-                    this.konten = (response.data.data)    
-                    this.dataIsLoading = false;
-                })
+            axios.get('/event/' + this.$route.params.slug).then(response => {
+                this.konten = (response.data.data)    
+                this.dataIsLoading = false;
+            }).catch(err => {
+                console.log(err)
+            });
         }
     },
     mounted() {
