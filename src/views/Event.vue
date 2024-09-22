@@ -87,6 +87,9 @@ export default {
         }
     },
     methods: {
+        title() {
+            document.title = 'ANTEK HUB | Event';
+        },
         getEvent() {
             axios.get('event').then(response => {
                 this.eventItems     = (response.data.data.data)
@@ -109,6 +112,7 @@ export default {
     },
     mounted() {
         this.getEvent()
+        this.title()
     },
 }
 </script>

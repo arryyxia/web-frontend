@@ -43,7 +43,8 @@ export default {
         // ? Fetch data
         getDetail() {
             axios.get('/event/' + this.$route.params.slug).then(response => {
-                this.konten = (response.data.data)    
+                this.konten = (response.data.data)
+                document.title = 'ANTEK HUB | ' + this.konten.judul; 
                 this.dataIsLoading = false;
             }).catch(err => {
                 console.log(err)

@@ -93,6 +93,9 @@ export default {
         }
     },
     methods: {
+        title() {
+            document.title = 'ANTEK HUB | Loker';
+        },
         getLoker () {
             axios.get(this.endpointLoker).then(response => { 
                 this.lokerItems     = (response.data.data);
@@ -115,6 +118,7 @@ export default {
     },
     mounted() {
         this.getLoker();
+        this.title();
     },
 }
 </script>

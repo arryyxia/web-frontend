@@ -61,15 +61,18 @@ export default {
         }
     },
     methods: {
+        title() {
+            document.title = "ANTEK HUB | "
+        },
         // Fetch data
         getDetail() {
-            axios.get('/loker/' + this.$route.params.slug)
-                .then(response => {
-                    this.konten = response.data.data
-                    this.dataIsLoading = false;
-                }).catch(err => {
-                    console.log(err)
-                });
+            axios.get('/loker/' + this.$route.params.slug).then(response => {
+                this.konten = response.data.data;
+                document.title = "ANTEK HUB | " + this.konten.judul
+                this.dataIsLoading = false;
+            }).catch(err => {
+                console.log(err)
+            });
         },
         hitungHari(tgl_selesai) {
             const nowDate = new Date();
@@ -88,10 +91,10 @@ export default {
     },
     mounted() {
         this.getDetail()
+        this.title()
     }
 }
 </script>
 
 <style>
-/* Add your styles here */
 </style>

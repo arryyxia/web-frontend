@@ -36,14 +36,19 @@ export default {
     data() {
         return {
             dataIsLoading: true,
-            konten: []
+            konten: [],
+            title: 'ANTEK HUB'
         }
     },
     methods: {
+        titleFun() {
+            document.title = this.title;
+        },
         // ? Fetch data
         getDetail() {
             axios.get('/berita/' + this.$route.params.slug).then(response => {
-                this.konten = (response.data.data)    
+                this.konten = (response.data.data)
+                document.title = 'ANTEK HUB | ' + this.konten.judul; 
                 this.dataIsLoading = false;
             }).catch(err => {
                 console.log(err)
@@ -52,6 +57,7 @@ export default {
     },
     mounted() {
         this.getDetail()
+        this.titleFun()
     },
 }
 </script>

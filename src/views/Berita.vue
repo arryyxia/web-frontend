@@ -104,6 +104,9 @@ export default {
         }
     },
     methods: {
+        title() {
+            document.title = 'ANTEK HUB | Berita';
+        },
         getBerita () {
             axios.get(this.endpointBerita).then(response => {
                 this.beritaItems        = (response.data.data.data);
@@ -141,6 +144,7 @@ export default {
     },
     mounted() {
         this.getBerita();
+        this.title();
         this.getKategori();
     },
 }

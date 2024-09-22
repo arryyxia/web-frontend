@@ -6,9 +6,9 @@
 
         <!-- Carousel Event -->
         <div v-if="eventIsLoading" class="col-span-12">
-            <Skeleton width="100%" height="35rem"></Skeleton>
+            <Skeleton width="100%" height="14rem" class="lg:h-[43.5rem]"></Skeleton>
         </div>
-        
+
         <div v-else class="col-span-12">
             <VueFlux
                 :options="options"
@@ -27,8 +27,8 @@
                                 class="h-full flex justify-between"
                             >
                                 <div class="bg-gray-900/70 md:text-xl mb-2 font-bold md:h-36 h-24 p-5 flex flex-col gap-2 justify-center items-center rounded-md text-white">
-                                    <div class="bg-red-500 md:min-w-20 md:min-h-20 min-h-12 min-w-12 rounded-full flex items-center justify-center z-10 text-lg">
-                                        <p>{{ hitungHari(getEventBySlug(customCaptionProps.caption).tgl_event) }}</p>
+                                    <div class="bg-red-500 md:min-w-20 md:min-h-20 min-h-12 min-w-12 rounded-full flex items-center justify-center z-10">
+                                        <p class="text-lg md:text-xl">{{ hitungHari(getEventBySlug(customCaptionProps.caption).tgl_event) }}</p>
                                     </div>
                                     <p>Hari Lagi</p>
                                 </div>
@@ -213,7 +213,7 @@ export default {
     },
     methods: {
         title() {
-            document.title += ' Home';
+            document.title = 'ANTEK HUB | Beranda';
         },
         getLoker() {
             axios.get('loker?limit=4').then(response => {
