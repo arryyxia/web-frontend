@@ -1,12 +1,17 @@
 <template>
-    <RouterLink :to="activityLink" class="flex justify-end">
+    <Button @click="visible = true" :ripple="false" class="flex justify-end" unstyled>
         <div class="flex justify-end gap-2 text-black border-none max-w-32 ">
             <i class="text-2xl text-black" :class="activityIcon"></i>
             <p class="text-black">
                 {{activityCount}}
             </p>
         </div>
-    </RouterLink>
+    </Button>
+    <Dialog v-model:visible="visible" modal header="Install Di Google Play Store" :style="{ width: '50vw' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
+        <p class="m-0">
+            Untuk Melakukan full aktifitas install full aplikasi di google playstore
+        </p>
+    </Dialog>
 </template>
 
 <script>
@@ -24,7 +29,12 @@ export default {
             type: String,
             required: true,
         },
-    }
+    },
+    data() {
+        return {
+            visible: false
+        }
+    },
 }
 </script>
 

@@ -3,15 +3,17 @@
         <Image :src="img" :alt="`Gambar dari berita ${judul}`" width="400" preview 
             class="col-span-3 rounded-l-lg z-10" 
         />
-        <RouterLink :to="mainLink" class="h-48 col-span-9">
-            <div class="p-5 min-w-0 h-full flex flex-col justify-between">
-                <div class="flex flex-col gap-3">
-                    <h3 class="text-lg font-semibold truncate">{{ judul }}</h3>
-                    <p class="line-clamp-2">{{ deskripsi }}</p>
+        <div class="h-48 col-span-9 p-5 flex flex-col justify-between">
+            <RouterLink :to="mainLink">
+                <div class="min-w-0 flex flex-col">
+                    <div class="flex flex-col gap-3">
+                        <h3 class="text-lg font-semibold truncate">{{ judul }}</h3>
+                        <p class="line-clamp-2">{{ deskripsi }}</p>
+                    </div>
                 </div>
-                <ButtonActivity :activityLink="activityLink" :activityCount="activityCount" :activityIcon="activityIcon"></ButtonActivity>
-            </div>
-        </RouterLink>
+            </RouterLink>
+            <ButtonActivity :activityLink="activityLink" :activityCount="activityCount" :activityIcon="activityIcon"></ButtonActivity>
+        </div>
     </div>
 </template>
 

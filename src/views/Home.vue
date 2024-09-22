@@ -6,7 +6,12 @@
 
         <!-- Carousel Event -->
         <div v-if="eventIsLoading" class="col-span-12">
-            <Skeleton width="100%" height="14rem" class="lg:h-[43.5rem]"></Skeleton>
+            <div class="hidden md:block">
+                <Skeleton width="100%" height="43.5rem"></Skeleton>
+            </div>
+            <div class="md:hidden">
+                <Skeleton width="100%" height="13.5rem"></Skeleton>
+            </div>
         </div>
 
         <div v-else class="col-span-12">

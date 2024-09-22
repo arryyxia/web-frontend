@@ -19,7 +19,7 @@ export default defineConfig({
     AutoImport({
       include: [
         /\.vue$/,
-        /\.vue\?vue/, // .vue
+        /\.vue\?vue/,
       ],
       imports: [
         'vue',

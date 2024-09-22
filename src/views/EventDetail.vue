@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div v-else class="col-span-12 text-center">
+        <div v-else class="col-span-12 text-center flex flex-col gap-2">
             <!-- static -->
             <p class="text-lg font-semibold text-red-600">Event</p>
             <h2 class="text-3xl font-semibold">{{konten.judul}}</h2>
