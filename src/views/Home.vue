@@ -20,6 +20,26 @@
                     <FluxControls v-bind="controlsProps" />
                 </template>
 
+                <template #caption="captionProps">
+                    <FluxCaption v-bind="captionProps">
+                        <template v-slot="customCaptionProps">
+                            <RouterLink :to="`event/${customCaptionProps.caption}`" 
+                                class="h-full flex justify-between"
+                            >
+                                <div class="bg-gray-900/70 md:text-xl mb-2 font-bold md:h-36 h-24 p-5 flex flex-col gap-2 justify-center items-center rounded-md text-white">
+                                    <div class="bg-red-500 md:min-w-20 md:min-h-20 min-h-12 min-w-12 rounded-full flex items-center justify-center z-10 text-lg">
+                                        <p>{{ hitungHari(getEventBySlug(customCaptionProps.caption).tgl_event) }}</p>
+                                    </div>
+                                    <p>Hari Lagi</p>
+                                </div>
+                                <div class="md:text-xl mb-2 font-bold bg-red-600 md:h-14 h-10 p-5 flex flex-col justify-center items-center rounded-md">
+                                    <h3 class="">{{`${getEventBySlug(customCaptionProps.caption).peserta} / ${getEventBySlug(customCaptionProps.caption).kuota} Peserta`}}</h3>
+                                </div>
+                            </RouterLink>
+                        </template>
+                    </FluxCaption>
+                </template>
+
                 <template #pagination="paginationProps">
                     <FluxPagination v-bind="paginationProps" />
                 </template>
@@ -29,7 +49,6 @@
                 </template>
             </VueFlux>
         </div>
-
 
         <!-- Daftar Berita -->
         <!-- Title -->
@@ -146,28 +165,18 @@
 </template>
 
 <script>
-import {
-  VueFlux,
-  FluxCaption,
-  FluxControls,
-  FluxIndex,
-  FluxPagination,
-  FluxPreloader,
-  Img,
-  Slide,
-} from 'vue-flux';
+import { VueFlux, FluxCaption, FluxControls, FluxIndex, FluxPagination, Img, Slide, } from 'vue-flux';
 
 export default {
-  name: 'Home',
-  inject: ['default'],
-  components: {
-    VueFlux,
-    FluxCaption,
-    FluxControls,
-    FluxIndex,
-    FluxPagination,
-    FluxPreloader,
-  },
+    name: 'Home',
+    inject: ['default'],
+    components: {
+        VueFlux,
+        FluxCaption,
+        FluxControls,
+        FluxIndex,
+        FluxPagination,
+    },
     data() {
         return {
             // Flux slide
@@ -180,6 +189,7 @@ export default {
 
             // ? Event
             eventItems  : [],
+            eventItemsMap: {},
             eventIsLoading: true,
             
             // ? Berita
@@ -203,9 +213,7 @@ export default {
     },
     methods: {
         title() {
-            let targetTitle = document.querySelector('title');
-            let changeTo    = targetTitle.text + 'Home'; 
-            targetTitle     = changeTo;
+            document.title += ' Home';
         },
         getLoker() {
             axios.get('loker?limit=4').then(response => {
@@ -223,18 +231,31 @@ export default {
                 console.log(err)
             });
         },
-        getEvent() {
-            axios.get('event').then(response => {
+        getEvent() { 
+            axios.get('event').then((response) => {
                 this.eventItems = response.data.data.data;
                 this.eventIsLoading = false;
 
+                // Create a map for quick lookup
+                this.eventItemsMap = this.eventItems.reduce((acc, event) => {
+                acc[event.slug] = event;
+                return acc;
+                }, {});
+
                 // Map eventItems to rscs for VueFlux
-                this.rscs = this.eventItems.map(item => 
-                    markRaw(new Img(this.default.img + item.gambar, item.alt || 'Event Image'))
+                this.rscs = this.eventItems.map((item) =>
+                markRaw(new Img(this.default.img + item.gambar, item.slug))
                 );
-            }).catch(err => {
+            }).catch((err) => {
                 console.log(err);
             });
+        },
+        getEventBySlug(slug) {
+            const event = this.eventItems.find((event) => event.slug === slug);
+            if (!event) {
+                return {};
+            }
+            return event;
         },
         getKategori() {
             axios.get('kategori').then(response => {
@@ -251,6 +272,15 @@ export default {
 			this.endpointBerita     = this.selectedCategory ? 'berita?kategori=' + slug : 'berita';
 			this.getBerita();
 		},
+        hitungHari(tgl) {
+            const nowDate = new Date();
+            const endDate = new Date(tgl);
+
+            const timeDiff = endDate - nowDate;
+            const dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+            return dayDiff > 0 ? dayDiff : 0; 
+        },
     },
     mounted() {
         this.getLoker();
@@ -280,14 +310,14 @@ export default {
     rect {
         display: none;
     }
-    /* polyline:hover{
-        stroke: #DC2626;
+    .vue-flux .flux-image {
+        @apply rounded-md
     }
-    .flux-button:hover>svg line, .flux-button:hover>svg plyline{
-        stroke: #DC2626;
+    .vue-flux .flux-caption {
+        background: none;
+        @apply h-full absolute
     }
-    .flux-button:hover>svg stroke:line,.flux-button:hover>svg polyline {
-        stroke: #DC2626;
-        
-    } */
+    .flux-controls {
+        @apply z-50
+    }
 </style>

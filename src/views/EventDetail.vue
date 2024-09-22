@@ -19,7 +19,7 @@
             <p class="text-lg font-semibold text-red-600">Event</p>
             <h2 class="text-3xl font-semibold">{{konten.judul}}</h2>
             <p class="text-lg font-normal">{{ konten.penulis }}</p>
-            <p class="text-lg font-normal">{{ konten.created_at }}</p>
+            <p class="text-lg font-normal">{{ hitungHari(konten.created_at) }}</p>
 
             <div class="bg-white shadow-md p-5 rounded-lg flex flex-col items-center gap-6">
                 <img :src="this.default.img + konten.gambar" alt="">
@@ -48,6 +48,11 @@ export default {
             }).catch(err => {
                 console.log(err)
             });
+        },
+        hitungHari(dateStr) {
+            const date = new Date(dateStr);
+            const options = { day: 'numeric', month: 'short', year: 'numeric' };
+            return date.toLocaleDateString('en-GB', options);
         }
     },
     mounted() {

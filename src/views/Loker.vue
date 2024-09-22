@@ -14,11 +14,11 @@
                     class="shadow-md col-span-12 lg:col-span-6 rounded-lg bg-white">
                     <div class="p-5 flex flex-col gap-2">
                         <!-- Header -->
-                        <div class="flex items-center gap-4 pb-3 border-b">
-                            <Skeleton shape="circle" size="5rem"></Skeleton>
-                            <div class="flex flex-col justify-center gap-2">
-                                <Skeleton width="25rem" height="1.5rem"></Skeleton>
-                                <Skeleton width="20rem" height="1.2rem"></Skeleton>
+                        <div class="grid grid-cols-12 items-center gap-4 pb-3 border-b">
+                            <Skeleton class="col-span-3 md:col-span-2" shape="circle" width="5rem" height="5rem"></Skeleton>
+                            <div class="col-span-9 md:col-span-10 flex gap-4 flex-col">
+                                <Skeleton width="90%" height="1.5rem"></Skeleton>
+                                <Skeleton width="60%" height="1.2rem"></Skeleton>
                             </div>
                         </div>
                         <div class="flex justify-between lg:justify-left gap-5 flex-wrap">
