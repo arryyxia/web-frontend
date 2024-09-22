@@ -32,7 +32,7 @@
                                 class="h-full flex justify-between"
                             >
                                 <div class="bg-gray-900/70 md:text-xl mb-2 font-bold md:h-36 h-24 p-5 flex flex-col gap-2 justify-center items-center rounded-md text-white">
-                                    <div class="bg-red-500 md:min-w-20 md:min-h-20 min-h-12 min-w-12 rounded-full flex items-center justify-center z-10">
+                                    <div class="bg-red-600 md:min-w-20 md:min-h-20 min-h-12 min-w-12 rounded-full flex items-center justify-center z-10">
                                         <p class="text-lg md:text-xl">{{ hitungHari(getEventBySlug(customCaptionProps.caption).tgl_event) }}</p>
                                     </div>
                                     <p>Hari Lagi</p>

@@ -40,7 +40,6 @@ app.use(PrimeVue, {
             }
         }
     },
-    ripple: true,
 });
 
 app.use(ConfirmationService)

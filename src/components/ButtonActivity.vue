@@ -1,5 +1,5 @@
 <template>
-    <Button @click="visible = true" :ripple="false" class="flex justify-end" unstyled>
+    <Button @click="visible = true" class="flex justify-end" unstyled>
         <div class="flex justify-end gap-2 text-black border-none max-w-32 ">
             <i class="text-2xl text-black" :class="activityIcon"></i>
             <p class="text-black">
