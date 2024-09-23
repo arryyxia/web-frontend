@@ -34,14 +34,14 @@
                             </li>
                             <li
                                 v-else
-                                @click="goToBerita"
                                 class="px-4 py-2 cursor-pointer hover:bg-gray-200"
                             >
-                                Berita ({{ suggestions.berita }})
+								<RouterLink :to="search">
+                                	Berita ({{ suggestions.berita }})
+								</RouterLink>
                             </li>
                             <li
                                 v-if="suggestions.loker"
-                                @click="goToLoker"
                                 class="px-4 py-2 cursor-pointer hover:bg-gray-200"
                             >
                                 Loker ({{ suggestions.loker }})
@@ -121,12 +121,12 @@ export default {
                 this.showSuggestions = false;
             }, 200);
         },
-        goToBerita() {
-            window.location.href = `https://api.antekhub.com/api/public/berita?search=${this.searchQuery}`;
-        },
-        goToLoker() {
-            window.location.href = `https://api.antekhub.com/api/public/loker?search=${this.searchQuery}`;
-        },
+        // goToBerita() {
+        //     window.location.href = `https://api.antekhub.com/api/public/berita?search=${this.searchQuery}`;
+        // },
+        // goToLoker() {
+        //     window.location.href = `https://api.antekhub.com/api/public/loker?search=${this.searchQuery}`;
+        // },
     },
 };
 </script>

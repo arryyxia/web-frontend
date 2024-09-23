@@ -40,6 +40,12 @@ const routes = [
     name: 'loker-detail',
     component: () => import('../views/LokerDetail.vue')
   },
+  // Search
+  {
+    path: '/search/:slug',
+    name: 'search',
+    component: () => import('../views/Search.vue')
+  },
   // Coming soon
   {
     path: '/coming-soon',

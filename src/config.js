@@ -1,5 +1,5 @@
 // Server: local, jsonServer, and ngrok
-const mode = 'main'
+const mode = 'local'
 
 const config = {
     main: {
@@ -10,7 +10,7 @@ const config = {
         },
     },
     local: {
-        baseURL: 'http://localhost:8000/api/',
+        baseURL: 'http://127.0.0.1:8000/api/public',
         headers: {
             'Access-Control-Allow-Origin': '*',
             'accept': 'application/json',
