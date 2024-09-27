@@ -62,7 +62,7 @@
                         :first="first"
                         :rows="rows"
                         :totalRecords="totalRecords"
-                        :rowsPerPageOptions="[6, 10, 20]"
+                        :rowsPerPageOptions="[10, 20]"
                         @page="onPageChange"
                     />
                 </div>
@@ -88,7 +88,7 @@ export default {
             pagination      : [],
             totalRecords    : 0,
             first           : 1,
-            rows            : 6,
+            rows            : 10,
             pageLinks       : 2,
         }
     },
@@ -97,7 +97,7 @@ export default {
             document.title = 'ANTEK HUB | Loker';
         },
         getLoker () {
-            axios.get(this.endpointLoker).then(response => { 
+            axios.get('loker?limit=6').then(response => { 
                 this.lokerItems     = (response.data.data);
                 this.totalRecords   = this.lokerItems.total
                 this.lokerIsloading = false;
