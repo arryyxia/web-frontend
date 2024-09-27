@@ -232,7 +232,7 @@ export default {
             axios.get(`${this.endpointBerita}`).then(response => {
                 this.beritaItems = (response.data.data.data);
                 this.beritaIsLoading = false;
-                console.log(response);
+                // console.log(response);
             }).catch(err => {
                 console.log(err)
             });
