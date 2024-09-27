@@ -14,7 +14,8 @@ export default {
         return {
             default: {
                 title: 'ANTEK HUB',
-                img: 'https://api.antekhub.com/storage/'
+                img: 'src/assets/'
+                // img: 'http://127.0.0.1/storage/'
             }
         };
     },

@@ -107,11 +107,10 @@ export default {
         title() {
             document.title = 'ANTEK HUB | Berita';
         },
-        getBerita () {
-            axios.get(this.endpointBerita).then(response => {
-                this.beritaItems        = (response.data.data.data);
-                this.totalRecords       = (response.data.data.total)
-                this.beritaIsLoading    = false;
+        getBerita() {
+            axios.get(`${this.endpointBerita}`).then(response => {
+                this.beritaItems = (response.data.data.data);
+                this.beritaIsLoading = false;
             }).catch(err => {
                 console.log(err)
             });

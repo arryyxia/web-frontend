@@ -1,5 +1,4 @@
-// Server: local, jsonServer, and ngrok
-const mode = 'local'
+const mode = 'ngrok';  // Use 'ngrok' or other modes you have like 'local' or 'main'
 
 const config = {
     main: {
@@ -16,6 +15,14 @@ const config = {
             'accept': 'application/json',
         },
     },
+    ngrok: {
+        baseURL: 'https://ladybird-diverse-pheasant.ngrok-free.app/api/public',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'ngrok-skip-browser-warning': 'true',
+            'accept': 'application/json',
+        },
+    },
 }
 
-export default config[mode]
+export default config[mode];
