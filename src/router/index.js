@@ -2,6 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 // import store from '../store'
 
 const routes = [
+  // NotFound
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue')
+  },
+  // Home
   {
     path: '/',
     name: 'home',
