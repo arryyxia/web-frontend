@@ -47,10 +47,10 @@ const routes = [
     name: 'loker-detail',
     component: () => import('../views/LokerDetail.vue')
   },
-  // Search
+  // ? Search
   {
-    path: '/search/:slug',
-    name: 'search',
+    path: '/pencarian/:slug',
+    name: 'pencarian',
     component: () => import('../views/Search.vue')
   },
   // Coming soon
