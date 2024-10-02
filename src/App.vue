@@ -13,30 +13,51 @@ export default {
     data() {
         return {
             default: {
-                title: 'ANTEK HUB',
+                // title: 'ANTEK HUB',
                 // img: '@/assets/'
                 // img: 'https://ladybird-diverse-pheasant.ngrok-free.app/storage/'
                 img: 'https://api.antekhub.com/storage/'
             },
+            // <meta property="og:site_name" content="Perdi Portfloio - Blog" />
+            // <meta property="og:title" content={title} />
+            // <meta property="og:url" content={Astro.url} />
+            // <meta property="og:image" content={imageUrl || '../assets/img/poto-portfolio.jpeg'} />
+            // <meta property="og:image:url" content={imageUrl || '../assets/img/poto-portfolio.jpeg'} />
+            // <meta
+            //     property="og:image:secure_url"
+            //     content={imageUrl || '../assets/img/poto-portfolio.jpeg'}
+            // />
+            // <meta property="og:image:type" content="image/jpeg" />
+            // <meta property="og:image:width" content="1200" />
+            // <meta property="og:image:height" content="600" />
+            // <meta property="og:image:alt" content="Poto Portfolio" />
             pageMeta: {
-                title: 'ANTEK HUB',
+                title: 'ANTEK HUB test',
                 meta: [
-                    { charset: 'utf-8' },
-                    { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
                     { name: 'author', content: 'IKATEK UNHAS' },
                     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
                     { name: 'description', content: 'Official Website ANTEK HUB' },
                     { name: 'keywords', content: 'alumni, alumni teknik unhas, teknik unhas, ikatan alumni unhas' },
                     
                     // Open Graph meta tags
-                    { property: 'og:title', content: `ANTEK HUB` },
-                    { property: 'og:type', content: 'article' },
-                    { property: 'og:url', content: 'https://antekhub.vercel.app/berita' },
-                    { property: 'og:description', content: 'Official Website ANTEK HUB' },
-                    { property: 'og:locale', content: 'id_ID' },
-                    { property: 'og:site_name', content: 'ANTEK HUB' },
-                    { property: 'og:image', content: `https://api.antekhub.com/storage/logo-ikatek.PNG` },
-                    { property: 'og:image:alt', content: 'Gambar Preview ANTEK HUB' },  
+                    { property: 'og:site_name',     content: 'ANTEK HUB' },
+                    { property: 'og:title',         content: 'ANTEK HUB' },
+                    { property: 'og:url',           content: 'https://antekhub.vercel.app/berita' },
+                    { property: 'og:type',          content: 'article' },
+                    { property: 'og:description',   content: 'Official Website ANTEK HUB' },
+                    { property: 'og:locale',        content: 'id_ID' },
+
+                    // IMG
+                    { property: 'og:image',     content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' },
+                    { property: 'og:image:url', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' },
+                    { 
+                        property: 'og:image:secure_url', 
+                        content: 'https://api.antekhub.com/storage/logo-ikatek.PNG'
+                    },
+                    { property: 'og:image:type',    content: 'image/jpeg' },
+                    { property: 'og:image:width',   content: '1200' },
+                    { property: 'og:image:height',  content: '600' },
+                    { property: 'og:image:alt',     content: 'Gambar Preview ANTEK HUB' },  
                 ],
             }
         };

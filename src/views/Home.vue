@@ -171,7 +171,6 @@
 
 <script>
 import { VueFlux, FluxCaption, FluxControls, FluxIndex, FluxPagination, Img, Slide, } from 'vue-flux';
-import { useHead } from "@vueuse/head";
 
 export default {
     name: 'Home',
