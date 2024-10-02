@@ -41,7 +41,7 @@
                                 <RouterLink
                                     :to="beritaRoute"
                                     v-if="suggestions.berita"
-                                    class="block px-4 py-3 hover:bg-blue-50 transition duration-200 ease-in-out"
+                                    class="block px-4 py-3 hover:bg-blue-50 transition duration-200 ease-in-out search"
                                 >
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-800 font-medium">Berita</span>
@@ -53,7 +53,7 @@
                                 <RouterLink
                                     :to="lokerRoute"
                                     v-if="suggestions.loker"
-                                    class="block px-4 py-3 hover:bg-blue-50 transition duration-200 ease-in-out"
+                                    class="block px-4 py-3 hover:bg-blue-50 transition duration-200 ease-in-out search"
                                 >
                                     <div class="flex justify-between items-center">
                                         <span class="text-gray-800 font-medium">Loker</span>
@@ -173,7 +173,7 @@ export default {
 </script>
 
 <style scoped>
-    .router-link-active {
+    .search.router-link-active {
         @apply text-gray-800 rounded-sm border-none;
     }
 </style>
