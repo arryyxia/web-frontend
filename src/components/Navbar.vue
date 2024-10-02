@@ -24,26 +24,45 @@
                         </div>
 
                         <!-- Suggestions Dropdown -->
-                        <div v-if="showSuggestions" class="absolute top-16 left-30 xl:w-[500px] md:w-[270px] sm:w-[270px] bg-white border shadow-md rounded-md">
-                            <div v-if="loading" class="px-4 py-2">Loading...</div>
-                            <div v-else-if="!suggestions.berita && !suggestions.loker" class="px-4 py-2">
+                        <div v-if="showSuggestions" class="absolute top-16 left-30 w-full xl:w-[500px] md:w-[270px] sm:w-[270px] bg-white border shadow-lg rounded-md z-50">
+                            <!-- Loading State -->
+                            <div v-if="loading" class="px-4 py-3 text-center text-gray-500">
+                                <span class="animate-pulse">Loading...</span>
+                            </div>
+
+                            <!-- No Data State -->
+                            <div v-else-if="!suggestions.berita && !suggestions.loker" class="px-4 py-3 text-center text-gray-500">
                                 Tidak ada data ditemukan
                             </div>
-                            <RouterLink
-                                :to="beritaRoute"
-                                v-if="suggestions.berita"
-                                class="cursor-pointer hover:bg-gray-200"
+
+                            <!-- Suggestions -->
+                            <div v-else class="divide-y divide-gray-200">
+                                <!-- Berita Section -->
+                                <RouterLink
+                                    :to="beritaRoute"
+                                    v-if="suggestions.berita"
+                                    class="block px-4 py-3 hover:bg-blue-50 transition duration-200 ease-in-out"
                                 >
-                                Berita ({{ suggestions.berita }})
-                            </RouterLink>
-                            <RouterLink
-                                :to="lokerRoute"
-                                v-if="suggestions.loker"
-                                class="cursor-pointer hover:bg-gray-200"
-                            >
-                                Loker ({{ suggestions.loker }})
-                            </RouterLink>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Berita</span>
+                                        <span class="text-gray-500 text-sm">({{ suggestions.berita }})</span>
+                                    </div>
+                                </RouterLink>
+
+                                <!-- Loker Section -->
+                                <RouterLink
+                                    :to="lokerRoute"
+                                    v-if="suggestions.loker"
+                                    class="block px-4 py-3 hover:bg-blue-50 transition duration-200 ease-in-out"
+                                >
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Loker</span>
+                                        <span class="text-gray-500 text-sm">({{ suggestions.loker }})</span>
+                                    </div>
+                                </RouterLink>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
