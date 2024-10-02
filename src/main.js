@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { createHead } from '@vueuse/head'
 
 import App from './App.vue'
 import router from './router'
@@ -13,6 +14,8 @@ import ConfirmationService from 'primevue/confirmationservice';
 import ToastService from 'primevue/toastservice';
 import 'primeicons/primeicons.css'
 
+// honarable mantion
+const head = createHead();
 import 'vue-flux/style.css';
 
 // ? Melakuakn import axios dan menggunakan 
@@ -44,6 +47,7 @@ app.use(PrimeVue, {
 
 app.use(ConfirmationService)
 app.use(ToastService)
+app.use(createHead())
 
 app.use(createPinia())
 app.use(router)

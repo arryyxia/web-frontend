@@ -29,6 +29,7 @@ export default defineConfig({
           'pinia': ['mapState', 'mapGetters', 'mapMutations', 'mapActions'],
           '@vueuse/integrations/useIDBKeyval': ['useIDBKeyval'],
           '@vueuse/core': ['useCloned', 'useTimeAgo'],
+          '@vueuse/head' : ['useHead']
         }
       ],
     })

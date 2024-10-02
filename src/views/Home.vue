@@ -256,7 +256,7 @@ export default {
                 this.rscs = this.eventItems.map((item) =>
                     markRaw(new Img(this.default.img + item.gambar, item.slug))
                 );
-                console.log(this.eventItems);
+                // console.log(this.eventItems);
             }).catch((err) => {
                 console.log(err);
             });
