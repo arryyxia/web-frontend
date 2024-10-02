@@ -1,19 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import store from '../store'
 
 const routes = [
-  // NotFound
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: () => import('../views/NotFound.vue')
-  },
   // Home
   {
     path: '/',
     name: 'home',
     component: () => import('../views/Home.vue')
   },
+
   // ? BERITA
   {
     path: '/berita',
@@ -25,6 +19,7 @@ const routes = [
     name: 'berita-detail',
     component: () => import('../views/BeritaDetail.vue')
   },
+
   // ? Event
   {
     path: '/event',
@@ -36,6 +31,7 @@ const routes = [
     name: 'event-detail',
     component: () => import('../views/EventDetail.vue')
   },
+
   // ? Loker
   {
     path: '/loker',
@@ -47,17 +43,26 @@ const routes = [
     name: 'loker-detail',
     component: () => import('../views/LokerDetail.vue')
   },
-  // ? Search
+
+  // ? Search Route (put this towards the bottom to avoid conflicts)
   {
     path: '/pencarian/:slug',
     name: 'pencarian',
     component: () => import('../views/Search.vue')
   },
-  // Coming soon
+
+  // Coming Soon
   {
     path: '/coming-soon',
     name: 'coming-soon',
     component: () => import('../views/ComingSoon.vue')
+  },
+
+  // NotFound (catch-all)
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('../views/NotFound.vue')
   },
 ]
 

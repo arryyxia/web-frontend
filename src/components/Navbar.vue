@@ -32,14 +32,14 @@
                             <RouterLink
                                 :to="beritaRoute"
                                 v-if="suggestions.berita"
-                                class="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                            >
+                                class="cursor-pointer hover:bg-gray-200"
+                                >
                                 Berita ({{ suggestions.berita }})
                             </RouterLink>
                             <RouterLink
                                 :to="lokerRoute"
                                 v-if="suggestions.loker"
-                                class="px-4 py-2 cursor-pointer hover:bg-gray-200"
+                                class="cursor-pointer hover:bg-gray-200"
                             >
                                 Loker ({{ suggestions.loker }})
                             </RouterLink>
@@ -128,28 +128,33 @@ export default {
     // },
     methods: {
         async fetchSuggestions() {
-            this.loading = true;
+            if (this.searchQuery.length > 2) {
+                this.loading = true;
 
-            await axios.get(`https://api.antekhub.com/api/public/search/${this.searchQuery}`).then((res) => {
-                console.log(res)
-                this.loading = false
-                this.suggestions = {
-                    berita: res.data.data.berita,
-                    loker: res.data.data.loker,
-                };
-            }).catch((err) => {
-                console.log(err)
-            });
+                await axios.get(`https://api.antekhub.com/api/public/search/${this.searchQuery}`).then((res) => {
+                    this.loading = false;
+                    this.suggestions = {
+                        berita: res.data.data.berita,
+                        loker: res.data.data.loker,
+                    };
+                }).catch((err) => {
+                    console.log(err);
+                });
+            } else {
+                this.suggestions = { berita: 0, loker: 0 };
+            }
         },
         hideSuggestions() {
             setTimeout(() => {
                 this.showSuggestions = false;
             }, 200);
         },
-    },
-};
+    }
+}
 </script>
 
 <style scoped>
-/* Add any necessary styling */
+    .router-link-active {
+        @apply text-gray-800 rounded-sm border-none;
+    }
 </style>
