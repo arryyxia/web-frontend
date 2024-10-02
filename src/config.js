@@ -1,8 +1,15 @@
-const mode = 'ngrok';  // Use 'ngrok' or other modes you have like 'local' or 'main'
+const mode = 'main';
 
 const config = {
     main: {
         baseURL: 'https://api.antekhub.com/api/public',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'accept': 'application/json',
+        },
+    },
+    ip: {
+        baseURL: 'http://103.245.38.78:8000/api/public',
         headers: {
             'Access-Control-Allow-Origin': '*',
             'accept': 'application/json',

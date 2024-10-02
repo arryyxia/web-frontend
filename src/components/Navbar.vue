@@ -24,32 +24,47 @@
                         </div>
 
                         <!-- Suggestions Dropdown -->
-                        <ul
-                            v-if="showSuggestions"
-                            class="absolute top-16 left-30 xl:w-[500px] md:w-[270px] sm:w-[270px] bg-white border shadow-md rounded-md"
-                        >
-                            <li v-if="loading" class="px-4 py-2">Loading...</li>
-                            <li v-else-if="!suggestions.berita && !suggestions.loker" class="px-4 py-2">
-                                Tidak ada data di temukan
-                            </li>
-                            <li
-                                v-else
-                                class="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                            >
-								<RouterLink :to="search">
-                                	Berita ({{ suggestions.berita }})
-								</RouterLink>
-                            </li>
-                            <li
-                                v-if="suggestions.loker"
-                                class="px-4 py-2 cursor-pointer hover:bg-gray-200"
-                            >
-                                Loker ({{ suggestions.loker }})
-                            </li>
-                        </ul>
+                        <div v-if="showSuggestions" class="absolute top-16 left-30 w-full xl:w-[500px] md:w-[270px] sm:w-[270px] bg-white border shadow-lg rounded-md z-50">
+                            <!-- Loading State -->
+                            <div v-if="loading" class="px-4 py-3 text-center text-gray-500">
+                                <span class="animate-pulse">Loading...</span>
+                            </div>
+
+                            <!-- No Data State -->
+                            <div v-else-if="!suggestions.berita && !suggestions.loker" class="px-4 py-3 text-center text-gray-500">
+                                Tidak ada data ditemukan
+                            </div>
+
+                            <!-- Suggestions -->
+                            <div v-else class="divide-y divide-gray-200">
+                                <!-- Berita Section -->
+                                <RouterLink
+                                    :to="beritaRoute"
+                                    v-if="suggestions.berita"
+                                    class="block px-4 py-3 hover:bg-blue-50 transition duration-200 ease-in-out"
+                                >
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Berita</span>
+                                        <span class="text-gray-500 text-sm">({{ suggestions.berita }})</span>
+                                    </div>
+                                </RouterLink>
+
+                                <!-- Loker Section -->
+                                <RouterLink
+                                    :to="lokerRoute"
+                                    v-if="suggestions.loker"
+                                    class="block px-4 py-3 hover:bg-blue-50 transition duration-200 ease-in-out"
+                                >
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-800 font-medium">Loker</span>
+                                        <span class="text-gray-500 text-sm">({{ suggestions.loker }})</span>
+                                    </div>
+                                </RouterLink>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
             </div>
 
             <!-- Menu Items -->
@@ -66,7 +81,7 @@
             </div>
         </div>
     </nav>
-	<nav class="shadow-md h-20 block lg:hidden fixed bg-white w-full bottom-0 z-50">
+    <nav class="shadow-md h-20 block lg:hidden fixed bg-white w-full bottom-0 z-50">
         <!-- Menus -->
         <div class="flex gap-4 items-center justify-around">
             <div v-for="item in menuItems" :key="item.label">
@@ -95,25 +110,57 @@ export default {
             loading: false,
         };
     },
+    computed: {
+        beritaRoute() {
+            return this.searchQuery ? `/pencarian/berita?search=${this.searchQuery}` : '/berita';
+        },
+        lokerRoute() {
+            return this.searchQuery ? `/pencarian/loker?search=${this.searchQuery}` : '/loker';
+        },
+    },
+    // methods: {
+    //     async fetchSuggestions() {
+    //         this.loading = true;
+
+    //         try {
+    //             const response = await fetch(`https://api.antekhub.com/api/public/search/${this.searchQuery}`);
+    //             const data = await response.json();
+
+    //             if (data.success) {
+    //                 this.suggestions = {
+    //                     berita: data.data.berita,
+    //                     loker: data.data.loker,
+    //                 };
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching suggestions:', error);
+    //         } finally {
+    //             this.loading = false;
+    //             this.showSuggestions = true;
+    //         }
+    //     },
+    //     hideSuggestions() {
+    //         setTimeout(() => {
+    //             this.showSuggestions = false;
+    //         }, 200);
+    //     },
+    // },
     methods: {
         async fetchSuggestions() {
-            this.loading = true;
+            if (this.searchQuery.length > 2) {
+                this.loading = true;
 
-            try {
-                const response = await fetch(`https://api.antekhub.com/api/public/search/${this.searchQuery}`);
-                const data = await response.json();
-
-                if (data.success) {
+                await axios.get(`https://api.antekhub.com/api/public/search/${this.searchQuery}`).then((res) => {
+                    this.loading = false;
                     this.suggestions = {
-                        berita: data.data.berita,
-                        loker: data.data.loker,
+                        berita: res.data.data.berita,
+                        loker: res.data.data.loker,
                     };
-                }
-            } catch (error) {
-                console.error('Error fetching suggestions:', error);
-            } finally {
-                this.loading = false;
-                this.showSuggestions = true; // Always show suggestions when input is clicked
+                }).catch((err) => {
+                    console.log(err);
+                });
+            } else {
+                this.suggestions = { berita: 0, loker: 0 };
             }
         },
         hideSuggestions() {
@@ -121,16 +168,12 @@ export default {
                 this.showSuggestions = false;
             }, 200);
         },
-        // goToBerita() {
-        //     window.location.href = `https://api.antekhub.com/api/public/berita?search=${this.searchQuery}`;
-        // },
-        // goToLoker() {
-        //     window.location.href = `https://api.antekhub.com/api/public/loker?search=${this.searchQuery}`;
-        // },
-    },
-};
+    }
+}
 </script>
 
 <style scoped>
-/* Add any necessary styling */
+    .router-link-active {
+        @apply text-gray-800 rounded-sm border-none;
+    }
 </style>

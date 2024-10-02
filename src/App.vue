@@ -15,7 +15,8 @@ export default {
             default: {
                 title: 'ANTEK HUB',
                 // img: '@/assets/'
-                img: 'https://ladybird-diverse-pheasant.ngrok-free.app/storage/'
+                // img: 'https://ladybird-diverse-pheasant.ngrok-free.app/storage/'
+                img: 'https://api.antekhub.com/storage/'
             }
         };
     },
