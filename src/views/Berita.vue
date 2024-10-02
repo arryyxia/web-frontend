@@ -122,7 +122,7 @@ export default {
                 { property: 'og:description', content: 'Official Website ANTEK HUB' },
                 { property: 'og:locale', content: 'id_ID' },
                 { property: 'og:site_name', content: 'ANTEK HUB' },
-                { property: 'og:image', content: `/logo-ikatek.PNG` },
+                { property: 'og:image', content: `https://api.antekhub.com/storage/logo-ikatek.PNG` },
                 { property: 'og:image:alt', content: 'Gambar Preview ANTEK HUB' },  
             ],
         });
