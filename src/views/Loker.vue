@@ -90,12 +90,19 @@ export default {
             first           : 1,
             rows            : 10,
             pageLinks       : 2,
+            pageMeta: {
+                title: 'ANTEK HUB | Loker',
+                meta: [
+                    { property: 'og:url',       content: `${window.location.origin}${this.$route.fullPath}` },
+                    { property: 'twitter:url',  content: `${window.location.origin}${this.$route.fullPath}` },
+                ]
+            }
         }
     },
     methods: {
-        title() {
-            document.title = 'ANTEK HUB | Loker';
-        },
+        // title() {
+        //     document.title = 'ANTEK HUB | Loker';
+        // },
         getLoker () {
             axios.get('loker?limit=6').then(response => { 
                 this.lokerItems     = (response.data.data);
@@ -118,7 +125,8 @@ export default {
     },
     mounted() {
         this.getLoker();
-        this.title();
+        // this.title();
+        useHead(this.pageMeta)
     },
 }
 </script>

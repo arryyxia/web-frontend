@@ -45,14 +45,14 @@ export default {
                     // Open Graph meta tags
                     { property: 'og:site_name', content: 'ANTEK HUB' },
                     { property: 'og:title', content: 'ANTEK HUB - Official Website' },
-                    { property: 'og:url', content: 'https://antekhub.vercel.app/' },
+                    { property: 'og:url', content: `${window.location.origin}${this.$route.fullPath}` },
                     { property: 'og:type', content: 'website' },
                     { property: 'og:description', content: 'ANTEK HUB Adaptive Colaborative' },
 
                     // IMG Open Graph
-                    { property: 'og:image', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' },
-                    { property: 'og:image:url', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' },
-                    { property: 'og:image:secure_url', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' },
+                    { property: 'og:image', content: 'https://api.antekhub.com/storage/meta-preview.jpg' },
+                    { property: 'og:image:url', content: 'https://api.antekhub.com/storage/meta-preview.jpg' },
+                    { property: 'og:image:secure_url', content: 'https://api.antekhub.com/storage/meta-preview.jpg' },
                     { property: 'og:image:type', content: 'image/jpeg' },
                     { property: 'og:image:width', content: '1200' },
                     { property: 'og:image:height', content: '600' },
@@ -60,10 +60,10 @@ export default {
 
                     // Twitter meta tags
                     { property: 'twitter:card', content: 'summary_large_image' },
-                    { property: 'twitter:url', content: 'https://antekhub.vercel.app/' },
+                    { property: 'twitter:url', content: `${window.location.origin}${this.$route.fullPath}` },
                     { property: 'twitter:title', content: 'ANTEK HUB - Official Website' },
                     { property: 'twitter:description', content: 'ANTEK HUB Adaptive Colaborative' },
-                    { property: 'twitter:image', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' },
+                    { property: 'twitter:image', content: 'https://api.antekhub.com/storage/meta-preview.jpg' },
                 ],
             }
         };
