@@ -171,6 +171,7 @@
 
 <script>
 import { VueFlux, FluxCaption, FluxControls, FluxIndex, FluxPagination, Img, Slide, } from 'vue-flux';
+import { useHead } from "@vueuse/head";
 
 export default {
     name: 'Home',
@@ -216,10 +217,25 @@ export default {
             lokerIsloading  : true,
         }
     },
+    setup() {
+        const { title, meta } = useHead({
+            title: 'ANTEK HUB',
+            meta: [
+                { name: 'description', content: 'Default description for the website.' },
+                { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+                { property: 'og:title', content: 'Default Title' },
+                { property: 'og:description', content: 'Default description for the website.' },
+                { property: 'og:image', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' },
+                { name: 'twitter:image', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' }, 
+            ],
+        });
+
+        return { title, meta };
+    },
     methods: {
-        title() {
-            document.title = 'ANTEK HUB | Beranda';
-        },
+        // title() {
+        //     document.title = 'ANTEK HUB | Beranda';
+        // },
         getLoker() {
             axios.get('loker?limit=4').then(response => {
                 this.lokerItems = (response.data.data.data);
@@ -298,7 +314,7 @@ export default {
         this.getBerita();
         this.getKategori();
         this.getEvent();
-        this.title();
+        // this.title();
     },
 }
 </script>
