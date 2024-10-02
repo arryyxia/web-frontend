@@ -41,7 +41,7 @@
                     :judul          ="item.judul" 
                     :deskripsi      ="item.deskripsi" 
                     :img            ="this.default.img + item.gambar" 
-                    :mainLink       ="`berita/${item.slug}`" 
+                    :mainLink       ="generateMainLink(item.slug)"
                     activityLink    ="/"
                     :activityCount  ="item.total_like"
                     activityIcon    ="pi pi-heart"
@@ -97,10 +97,10 @@
             </div>
     
             <!-- Main Content -->
-            <div class="col-span-12 grid grid-cols-12 gap-4">
+            <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
                 <LokerCard v-for="item in searchItems" :key="item.id_loker"
                     :judul          ="item.judul"
-                    :linkLoker      ="`loker/${item.slug}`"
+                    :linkLoker      ="generateMainLink(item.slug)"
                     :img            ="this.default.img + item.perusahaan.logo"
                     :perusahaan     ="item.perusahaan.nama_perusahaan"
                     :role           ="item.role"
@@ -161,9 +161,21 @@ export default {
             this.rows   = event.rows;
             this.changePage(event.page);
         },
+        generateMainLink(slug) {
+        if (this.$route.name === 'pencarian') {
+            if (this.beritaORloker === 'berita') {
+                return `/berita/${slug}`; 
+            } else if (this.beritaORloker === 'loker') {
+                return `/loker/${slug}`; 
+            }
+        }
+        
+        return `/${this.beritaORloker}/${slug}`;
+    },
     },
     watch: {
-        '$route.query.search': 'mencari' // Watch for changes in the search query and re-run 'mencari'
+        '$route.query.search': 'mencari', 
+        '$route.params.slug': 'mencari' 
     },
     mounted() {
         this.mencari()
