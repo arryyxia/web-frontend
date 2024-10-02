@@ -219,27 +219,24 @@ export default {
     },
     setup() {
         useHead({
-            title: 'PT. GLOBAL TEKNOLOGI INDOSERV',
+            title: 'ANTEK HUB',
             meta: [
                 { charset: 'utf-8' },
                 { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
-                { name: 'author', content: 'PT. GLOBAL TEKNOLOGI INDOSERV' },
+                { name: 'author', content: 'IKATEK UNHAS' },
                 { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-                { name: 'description', content: 'Official Website PT. GLOBAL TEKNOLOGI INDOSERV' },
-                { name: 'keywords', content: 'Global Teknologi Indoserv, tambang soroako, PT. Global Teknologi Indoserv, GlobalTekindo' },
+                { name: 'description', content: 'Official Website ANTEK HUB' },
+                { name: 'keywords', content: 'alumni, alumni teknik unhas, teknik unhas, ikatan alumni unhas' },
                 
                 // Open Graph meta tags
-                { property: 'og:title', content: 'PT. GLOBAL TEKNOLOGI INDOSERV' },
+                { property: 'og:title', content: `ANTEK HUB` },
                 { property: 'og:type', content: 'article' },
-                { property: 'og:url', content: 'https://globaltekindo.com/' },
-                { property: 'og:description', content: 'Official Website PT. GLOBAL TEKNOLOGI INDOSERV' },
+                { property: 'og:url', content: 'https://antekhub.vercel.app/' },
+                { property: 'og:description', content: 'Official Website ANTEK HUB' },
                 { property: 'og:locale', content: 'id_ID' },
-                { property: 'og:site_name', content: 'PT. GLOBAL TEKNOLOGI INDOSERV' },
-                { property: 'og:image', content: 'https://globaltekindo.com/_frontend/images/hero/hero.png' },
-                { property: 'og:image:alt', content: 'Gambar Preview PT. GLOBAL TEKNOLOGI INDOSERV' },
-                
-                // Twitter meta tags
-                { property: 'twitter:image', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' },
+                { property: 'og:site_name', content: 'ANTEK HUB' },
+                { property: 'og:image', content: `/logo-ikatek.PNG` },
+                { property: 'og:image:alt', content: 'Gambar Preview ANTEK HUB' },  
             ],
         });
     },
