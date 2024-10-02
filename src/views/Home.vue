@@ -239,19 +239,24 @@ export default {
         },
         getEvent() { 
             axios.get('event').then((response) => {
-                this.eventItems = response.data.data.data;
+                const today = new Date();
+
+                this.eventItems = response.data.data.data.filter((event) => {
+                    const eventEndDate = new Date(event.tgl_event);
+                    return eventEndDate >= today;
+                });
+
                 this.eventIsLoading = false;
 
-                // Create a map for quick lookup
                 this.eventItemsMap = this.eventItems.reduce((acc, event) => {
-                acc[event.slug] = event;
-                return acc;
+                    acc[event.slug] = event;
+                    return acc;
                 }, {});
 
-                // Map eventItems to rscs for VueFlux
                 this.rscs = this.eventItems.map((item) =>
-                markRaw(new Img(this.default.img + item.gambar, item.slug))
+                    markRaw(new Img(this.default.img + item.gambar, item.slug))
                 );
+                console.log(this.eventItems);
             }).catch((err) => {
                 console.log(err);
             });
