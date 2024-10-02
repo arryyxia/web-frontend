@@ -4,7 +4,7 @@
             <div class="flex items-center gap-4">
                 <!-- Logo -->
                 <RouterLink to="/" class="bg-color-none border-none">
-                    <img src="@/assets/logo-ikatek.png" alt="logo Ikatek" class="w-14" />
+                    <img src="https://api.antekhub.com/storage/logo-ikatek.PNG" alt="logo Ikatek" class="w-14" />
                 </RouterLink>
 
                 <div class="block border-2 h-14 px-3 rounded-full focus-within:ring-1">
