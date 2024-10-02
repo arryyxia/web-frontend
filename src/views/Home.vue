@@ -217,29 +217,6 @@ export default {
             lokerIsloading  : true,
         }
     },
-    setup() {
-        useHead({
-            title: 'ANTEK HUB',
-            meta: [
-                { charset: 'utf-8' },
-                { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
-                { name: 'author', content: 'IKATEK UNHAS' },
-                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-                { name: 'description', content: 'Official Website ANTEK HUB' },
-                { name: 'keywords', content: 'alumni, alumni teknik unhas, teknik unhas, ikatan alumni unhas' },
-                
-                // Open Graph meta tags
-                { property: 'og:title', content: `ANTEK HUB` },
-                { property: 'og:type', content: 'article' },
-                { property: 'og:url', content: 'https://antekhub.vercel.app/' },
-                { property: 'og:description', content: 'Official Website ANTEK HUB' },
-                { property: 'og:locale', content: 'id_ID' },
-                { property: 'og:site_name', content: 'ANTEK HUB' },
-                { property: 'og:image', content: `/logo-ikatek.PNG` },
-                { property: 'og:image:alt', content: 'Gambar Preview ANTEK HUB' },  
-            ],
-        });
-    },
     methods: {
         // title() {
         //     document.title = 'ANTEK HUB | Beranda';
