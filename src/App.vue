@@ -20,6 +20,21 @@ export default {
             }
         };
     },
+    setup() {
+        const { title, meta } = useHead({
+            title: 'ANTEK HUB',
+            meta: [
+                { name: 'description', content: 'Default description for the website.' },
+                { name: 'keywords', content: 'keyword1, keyword2, keyword3' },
+                { property: 'og:title', content: 'Default Title' },
+                { property: 'og:description', content: 'Default description for the website.' },
+                { property: 'og:image', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' }, // Gambar Open Graph
+                { name: 'twitter:image', content: 'https://api.antekhub.com/storage/logo-ikatek.PNG' }, // Gambar Twitter Card
+            ],
+        });
+
+        return { title, meta };
+    },
     provide() {
         return {
             default: this.default
