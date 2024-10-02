@@ -8,6 +8,8 @@
 </template>
 
 <script>
+// import { useHead } from '@unhead/vue';
+
 export default {
     name: 'App',
     data() {

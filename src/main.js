@@ -1,6 +1,8 @@
+import { createHead, VueHeadMixin } from '@unhead/vue'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import { createHead } from '@vueuse/head'
+// import { createHead } from '@vueuse/head'
+
 
 import App from './App.vue'
 import router from './router'
@@ -47,7 +49,10 @@ app.use(PrimeVue, {
 
 app.use(ConfirmationService)
 app.use(ToastService)
-app.use(createHead())
+app.use(head)
+app.mixin(VueHeadMixin)
+
+// app.use(createHead())
 
 app.use(createPinia())
 app.use(router)
