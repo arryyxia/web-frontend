@@ -141,6 +141,14 @@ export default {
             first           : 1,
             rows            : 6,
             pageLinks       : 2,
+
+            pageMeta: {
+                title: 'ANTEK HUB | Pencarian',
+                meta: [
+                    { property: 'og:url',       content: `${window.location.origin}${this.$route.fullPath}` },
+                    { property: 'twitter:url',  content: `${window.location.origin}${this.$route.fullPath}` },
+                ]
+            }
         }
     },
     methods: {
@@ -179,6 +187,7 @@ export default {
     },
     mounted() {
         this.mencari()
+        useHead(this.pageMeta)
     },
 }
 </script>

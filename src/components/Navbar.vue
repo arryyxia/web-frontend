@@ -24,7 +24,7 @@
                         </div>
 
                         <!-- Suggestions Dropdown -->
-                        <div v-if="showSuggestions" class="absolute top-16 left-30 w-full xl:w-[500px] md:w-[270px] sm:w-[270px] bg-white border shadow-lg rounded-md z-50">
+                        <div v-if="showSuggestions" class="absolute top-[70px] left-30 xl:w-[500px] w-[270px] bg-white border shadow-lg rounded-md z-50">
                             <!-- Loading State -->
                             <div v-if="loading" class="px-4 py-3 text-center text-gray-500">
                                 <span class="animate-pulse">Loading...</span>

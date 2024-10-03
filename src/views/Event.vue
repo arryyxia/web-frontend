@@ -84,12 +84,20 @@ export default {
             first           : 1,
             rows            : 6,
             pageLinks       : 2,
+
+            pageMeta: {
+                title: 'ANTEK HUB | Event',
+                meta: [
+                    { property: 'og:url',       content: `${window.location.origin}${this.$route.fullPath}` },
+                    { property: 'twitter:url',  content: `${window.location.origin}${this.$route.fullPath}` },
+                ]
+            }
         }
     },
     methods: {
-        title() {
-            document.title = 'ANTEK HUB | Event';
-        },
+        // title() {
+        //     document.title = 'ANTEK HUB | Event';
+        // },
         getEvent() {
             axios.get('event').then(response => {
                 this.eventItems     = (response.data.data.data)
@@ -112,7 +120,8 @@ export default {
     },
     mounted() {
         this.getEvent()
-        this.title()
+        // this.title()
+        useHead(this.pageMeta)
     },
 }
 </script>

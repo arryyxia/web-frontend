@@ -36,7 +36,19 @@ export default {
     data() {
         return {
             dataIsLoading: true,
-            konten: []
+            konten: [],
+            pageMeta: {
+                title: `ANTEK HUB |`,
+                meta: [
+                    { property: 'og:url',               content: `${window.location.origin}${this.$route.fullPath}` },
+                    { property: 'twitter:url',          content: `${window.location.origin}${this.$route.fullPath}` },
+                    { property: 'og:image',             content: `https://api.antekhub.com/storage/meta-preview.jpg` },
+                    { property: 'og:image:url',         content: `https://api.antekhub.com/storage/meta-preview.jpg` },
+                    { property: 'og:image:secure_url',  content: `https://api.antekhub.com/storage/meta-preview.jpg` },
+                    { property: 'twitter:image',        content: 'https://api.antekhub.com/storage/meta-preview.jpg' },
+                    { property: 'og:image:alt',         content: 'Gambar Preview ANTEK HUB' },
+                ]
+            }
         }
     },
     methods: {
@@ -44,8 +56,19 @@ export default {
         getDetail() {
             axios.get('/event/' + this.$route.params.slug).then(response => {
                 this.konten = (response.data.data)
-                document.title = 'ANTEK HUB | ' + this.konten.judul; 
                 this.dataIsLoading = false;
+                this.pageMeta.title = 'ANTEK HUB | ' + this.konten.judul; 
+                const imageUrl = `${this.default.img}${this.konten.gambar}`;
+
+                this.pageMeta.meta = [
+                    { property: 'og:url',               content: `${window.location.origin}${this.$route.fullPath}` },
+                    { property: 'twitter:url',          content: `${window.location.origin}${this.$route.fullPath}` },
+                    { property: 'og:image',             content: imageUrl },
+                    { property: 'og:image:url',         content: imageUrl },
+                    { property: 'og:image:secure_url',  content: imageUrl },
+                    { property: 'twitter:image',        content: imageUrl },
+                    { property: 'og:image:alt',         content: `${this.konten.judul}` },
+                ];
             }).catch(err => {
                 console.log(err)
             });
@@ -54,10 +77,11 @@ export default {
             const date = new Date(dateStr);
             const options = { day: 'numeric', month: 'short', year: 'numeric' };
             return date.toLocaleDateString('en-GB', options);
-        }
+        },
     },
     mounted() {
-        this.getDetail()
+        this.getDetail(),
+        useHead(this.pageMeta)
     },
 }
 </script>

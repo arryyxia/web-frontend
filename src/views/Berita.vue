@@ -102,12 +102,20 @@ export default {
             kategoriIsLoading   : true,
             isSelected          : null,
             selectedCategory    : null,
+
+            pageMeta: {
+                title: 'ANTEK HUB | Berita',
+                meta: [
+                    { property: 'og:url',       content: `${window.location.origin}${this.$route.fullPath}` },
+                    { property: 'twitter:url',  content: `${window.location.origin}${this.$route.fullPath}` },
+                ]
+            }
         }
     },
     methods: {
-        title() {
-            this.pageTitle = 'ANTEK HUB | Berita';
-        },
+        // title() {
+        //     this.pageTitle = 'ANTEK HUB | Berita';
+        // },
         getBerita() {
             axios.get('berita?limit=6').then(response => {
                 this.beritaItems = (response.data.data.data);
@@ -144,8 +152,9 @@ export default {
     },
     mounted() {
         this.getBerita();
-        this.title();
+        // this.title();
         this.getKategori();
+        useHead(this.pageMeta)
     },
 }
 </script>
