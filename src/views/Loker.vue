@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <!-- Loker -->
-        <div class="col-span-6 xl:col-span-3 flex items-center gap-3 border-none">
+        <div class="col-span-12 xl:col-span-3 flex items-center gap-3 border-none">
             <h2 class="text-2xl font-medium text-[#181818]">Lowongan Kerja</h2>
         </div>
 

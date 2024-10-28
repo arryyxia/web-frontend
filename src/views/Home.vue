@@ -1,6 +1,3 @@
-// TODO Carousel Event
-// TODO GANTI ACTIVITY LINK
-
 <template>
     <Layout>
 

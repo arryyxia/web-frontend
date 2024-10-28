@@ -9,7 +9,7 @@
             <Skeleton width="7rem" height="1.5rem"></Skeleton>
 
             <div class="bg-white shadow-md p-5 rounded-lg flex flex-col items-center gap-6 w-full">
-                <Skeleton width="50%" height="25rem"></Skeleton>
+                <Skeleton width="100%" height="25rem"></Skeleton>
                 <img :src="this.default.img + konten.gambar" alt="">
                 <div v-html="konten.konten" class="flex flex-col gap-3"></div>
             </div>

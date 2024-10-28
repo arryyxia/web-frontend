@@ -23,7 +23,7 @@
                         </div>
 
                         <!-- Search Dropdown -->
-                        <div v-if="showSuggestions" class="absolute top-[70px] xl:w-[500px] w-[250px] bg-white border shadow-lg rounded-md z-50">
+                        <div v-if="showSuggestions" class="absolute top-[70px] xl:w-[360px] w-[250px] bg-white border shadow-lg rounded-md z-50">
                             <!-- Loading State -->
                             <div v-if="loading" class="px-4 py-3 text-center text-gray-500">
                                 <span class="animate-pulse">Loading...</span>
