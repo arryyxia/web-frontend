@@ -1,17 +1,16 @@
 <template>
     <nav class="shadow-md h-20 fixed bg-white w-full top-0 z-50">
         <div class="flex justify-between px-5 items-center h-full">
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 justify-between w-full lg:justify-normal lg:w-fit">
                 <!-- Logo -->
                 <RouterLink to="/" class="bg-color-none border-none">
-                    <img src="https://api.antekhub.com/storage/logo-ikatek.PNG" alt="logo Ikatek" class="w-14" />
+                    <img src="https://api.antekhub.com/storage/logo-ikatek.PNG" alt="logo Ikatek" class="max-w-14" />
                 </RouterLink>
 
-                <div class="block border-2 h-14 px-3 rounded-full focus-within:ring-1">
+                <div class="block border-2 h-14 px-3 rounded-full focus-within:ring-1 w-[270px] lg:w-full">
                     <div class="flex flex-col justify-center h-full">
                         <div class="relative flex items-center">
                             <i class="pi pi-search text-lg"></i>
-
                             <input
                                 type="text"
                                 placeholder="Search"
@@ -19,12 +18,12 @@
                                 @input="fetchSuggestions"
                                 @focus="showSuggestions = true"
                                 @blur="hideSuggestions"
-                                class="bg-transparent pl-4 pr-8 focus:outline-none xl:w-[500px]"
+                                class="bg-transparent pl-4 pr-8 focus:outline-none w-[270px] lg:w-full"
                             />
                         </div>
 
-                        <!-- Suggestions Dropdown -->
-                        <div v-if="showSuggestions" class="absolute top-[70px] left-30 xl:w-[500px] w-[270px] bg-white border shadow-lg rounded-md z-50">
+                        <!-- Search Dropdown -->
+                        <div v-if="showSuggestions" class="absolute top-[70px] xl:w-[500px] w-[250px] bg-white border shadow-lg rounded-md z-50">
                             <!-- Loading State -->
                             <div v-if="loading" class="px-4 py-3 text-center text-gray-500">
                                 <span class="animate-pulse">Loading...</span>
