@@ -10,14 +10,9 @@ const routes = [
 
   // privacy-policy
   {
-    path: '/privacy-policy/id',
+    path: '/privacy-policy',
     name: 'privacy-policy',
     component: () => import('../views/PrivacyPolicy.vue')
-  },
-  {
-    path: '/privacy-policy/en',
-    name: 'privacy-policy-en',
-    component: () => import('../views/PrivacyPolicyEN.vue')
   },
 
   // ? BERITA
