@@ -7,7 +7,7 @@
                     <img src="https://api.antekhub.com/storage/logo-ikatek.PNG" alt="logo Ikatek" class="w-14" />
                 </RouterLink>
 
-                <div class="block border-2 h-14 px-3 rounded-full focus-within:ring-1">
+                <div class="block border-2 h-14 px-3 rounded-full w-10/12 focus-within:ring-1">
                     <div class="flex flex-col justify-center h-full">
                         <div class="relative flex items-center">
                             <i class="pi pi-search text-lg"></i>
