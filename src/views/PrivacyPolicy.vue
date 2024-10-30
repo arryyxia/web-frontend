@@ -5,13 +5,13 @@
 			<div class="flex justify-between items-center mb-10">
 				<p class="text-3xl font-semibold">Privacy Policy</p>
 				<div class="flex items-center gap-2">
-					<p>Ganti Bahasa</p>
+					<p>Ganti Bahasa / Change Language</p>
 					<ToggleButton v-model="checked" class="w-24 h-12" onLabel="EN" offLabel="ID" />
 				</div>
 			</div>
 
 			<div class="bg-white shadow-md p-5 rounded-lg flex flex-col gap-6" v-html="privacyPolicy.konten" v-if="!checked"></div>
-			<div class="bg-white shadow-md p-5 rounded-lg flex flex-col gap-6" v-html="privacyPolicyEN.konten" v-else"></div>
+			<div class="bg-white shadow-md p-5 rounded-lg flex flex-col gap-6" v-html="privacyPolicyEN.konten" v-else></div>
 		</div>
 	</Layout>
 </template>
@@ -22,7 +22,7 @@ export default {
 	inject:['default'],
 	data() {
 		return {
-			checked: false,
+			checked: true,
 			privacyPolicy: {
 				bahasa: 'ID',
 				konten: `

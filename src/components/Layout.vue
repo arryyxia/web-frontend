@@ -5,6 +5,8 @@
     <div class="my-container pt-20">
         <div class="pb-24 grid grid-cols-12 gap-5 m-5">
             <slot></slot>
+
+            <Footer></Footer>
         </div>
     </div>
 </template>

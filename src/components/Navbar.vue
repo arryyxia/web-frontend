@@ -77,13 +77,6 @@
                         <h3>{{ item.label }}</h3>
                     </RouterLink>
                 </div>
-                <RouterLink 
-                    to="/privacy-policy" 
-                    class="flex gap-2 items-center p-2 px-4 border-b-4 border-b-white transition-all font-medium text-lg rounded-sm hover:border-b-4 hover:border-b-[#DC2626] hover:text-[#DC2626]"
-                >
-                    <i class="pi pi-shield"></i>
-                    <h3>Privacy Policy</h3>
-                </RouterLink>
             </div>
         </div>
     </nav>
