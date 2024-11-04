@@ -1,4 +1,4 @@
-const mode = 'main';
+const mode = 'local';
 
 const config = {
     main: {

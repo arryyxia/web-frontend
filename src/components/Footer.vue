@@ -8,7 +8,7 @@
 						<li v-for="item in list" :key="item.name"><RouterLink :to="item.link" class="hover:underline">{{ item.name }}</RouterLink></li>
 					</ul>
 				</div>
-				<p class="text-center text-sm text-gray-600">Copyright © 2024 ANTEK HUB. All rights reserved.</p>
+				<p class="text-center text-sm text-gray-600">Copyright © {{ currentYear }} ANTEK HUB. All rights reserved.</p>
 			</template>
 		</Card>
 	</div>
@@ -20,6 +20,7 @@ export default {
 	inject:['default'],
 	data() {
 		return {
+			currentYear: new Date().getFullYear(),
 			list: [
 				{
 					name: 'Privacy Policy',
