@@ -2,22 +2,12 @@
     <Layout>
         <div v-if="dataIsLoading" class="col-span-12 grid grid-cols-12 gap-6">
             <!-- static -->
-            <!-- <Skeleton width="7rem" height="1.5rem"></Skeleton>
-            <Skeleton width="100%" height="2.5rem"></Skeleton>
-            <Skeleton width="50%" height="2.5rem"></Skeleton>
-            <Skeleton width="7rem" height="1.5rem"></Skeleton>
-            <Skeleton width="15rem" height="1.5rem"></Skeleton>
-
-            <div class="bg-white shadow-md p-5 rounded-lg flex flex-col items-center gap-6 w-full">
-                <Skeleton width="50%" height="25rem"></Skeleton>
-                <Skeleton width="100%" height="50rem"></Skeleton>
-            </div> -->
             <div class="col-span-12 lg:col-span-8 flex flex-col gap-2">
                 <Skeleton width="20%" height="2rem"></Skeleton>
                 <Skeleton width="100%" height="4rem"></Skeleton>
                 <Skeleton width="40%" height="2rem"></Skeleton>
+                <Skeleton width="100%" height="25rem"></Skeleton>
                 <Skeleton width="100%" height="30rem"></Skeleton>
-                <Skeleton width="100%" height="20rem"></Skeleton>
             </div>
 
             <div class="col-span-12 lg:col-span-4 flex flex-col gap-2">
@@ -126,6 +116,12 @@ export default {
         this.getBerita()
         useHead(this.pageMeta)
     },
+    watch: {
+        $route(to, from) {
+            this.dataIsLoading = true;
+            this.getDetail();
+        },
+    }
 }
 </script>
 

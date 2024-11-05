@@ -5,7 +5,7 @@
 			<i class="pi pi-angle-right"></i>
 		</RouterLink>
 		<div v-for="item in otherLinks" :key="item.judul">
-			<RouterLink :to="item.link" class="hover:underline">{{ item.judul }}</RouterLink>
+			<RouterLink :to="`${link}/${item.slug}`" class="hover:underline">{{ item.judul }}</RouterLink>
 			<Divider />
 		</div>
 	</div>

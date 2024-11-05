@@ -149,7 +149,11 @@
             </div>
 
             <!-- MAIN -->
-            <LokerCard v-for="item in lokerItems" :key="item.judul"
+            <div class="col-span-12 gap-4 text-center" v-if="lokerIsEmpty">
+                <p> - Tidak ada loker yang berlaku - </p>
+            </div>
+            <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
+                <LokerCard v-for="item in lokerItems" :key="item.judul"
                 :judul			="item.judul"
                 :linkLoker		="`loker/${item.slug}`"
                 :img			="this.default.img + item.perusahaan.logo"
@@ -159,7 +163,8 @@
                 :pengalaman		="`Tahun ${item.pengalaman_kerja}`"
                 :waktuTampil	="item.tgl_selesai"
                 :deskripsi		="item.deskripsi"
-            ></LokerCard>
+                ></LokerCard>
+            </div>
 
         </div>
 
@@ -211,6 +216,7 @@ export default {
             lokerItems      : [],
             lokerSkeletons  : 4,
             lokerIsloading  : true,
+            lokerIsEmpty    : false,
 
             pageMeta: {
                 title: 'ANTEK HUB | Beranda',
@@ -226,8 +232,15 @@ export default {
         //     document.title = 'ANTEK HUB | Beranda';
         // },
         getLoker() {
+            const today = new Date();
             axios.get('loker?limit=4').then(response => {
-                this.lokerItems = (response.data.data.data);
+                this.lokerItems     = response.data.data.data.filter((event) => {
+                    const eventEndDate = new Date(event.tgl_selesai);
+                    return eventEndDate >= today;
+                });
+                if (this.lokerItems == 0) {
+                    this.lokerIsEmpty = true
+                }
                 this.lokerIsloading = false;
             }).catch(err => {
                 console.log(err)
