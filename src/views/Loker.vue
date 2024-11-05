@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
-                    <LokerCard v-for="item in lokerItems.data" :key="item.id_loker"
+                    <LokerCard v-for="item in lokerItems" :key="item.id_loker"
                         :judul          ="item.judul"
                         :linkLoker      ="`loker/${item.slug}`"
                         :img            ="this.default.img + item.perusahaan.logo"
@@ -110,14 +110,14 @@ export default {
         // title() {
         //     document.title = 'ANTEK HUB | Loker';
         // },
-        async getLoker () {
+        async getLoker() {
             const today = new Date();
             await axios.get('loker?limit=6').then(response => {
-                this.lokerItems     = response.data.data.data.filter((event) => {
-                    const eventEndDate = new Date(event.tgl_selesai);
-                    return eventEndDate >= today;
+                this.lokerItems     = response.data.data.data.filter((loker) => {
+                    const lokerEndDate = new Date(loker.tgl_selesai);
+                    return lokerEndDate >= today;
                 });
-                if (this.lokerItems == 0) {
+                if (this.lokerItems.length == 0) {
                     this.lokerIsEmpty = true
                 }
                 this.totalRecords   = this.lokerItems.total

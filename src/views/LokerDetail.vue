@@ -135,11 +135,21 @@ export default {
                 console.log(err)
             });
         },
-        async getLoker() {
-            await axios.get('loker?limit=4').then(response => {
-                this.otherLinks = (response.data.data.data)
-                this.otherLinksLoading = false
-            })
+        async getLoker () {
+            const today = new Date();
+            await axios.get('loker').then(response => {
+                this.otherLinks     = response.data.data.data.filter((loker) => {
+                    const lokerEndDate = new Date(loker.tgl_selesai);
+                    return lokerEndDate >= today;
+                });
+                if (this.otherLinks.length == 0) {
+                    this.lokerIsEmpty = true
+                }
+                this.totalRecords   = this.otherLinks.total
+                this.otherLinksLoading = false;
+            }).catch(err => {
+                console.log(err)
+            });
         },
         hitungHari(tgl_selesai) {
             const nowDate = new Date();

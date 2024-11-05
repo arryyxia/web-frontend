@@ -149,21 +149,23 @@
             </div>
 
             <!-- MAIN -->
-            <div class="col-span-12 gap-4 text-center" v-if="lokerIsEmpty">
-                <p> - Tidak ada loker yang berlaku - </p>
-            </div>
             <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
-                <LokerCard v-for="item in lokerItems" :key="item.judul"
-                :judul			="item.judul"
-                :linkLoker		="`loker/${item.slug}`"
-                :img			="this.default.img + item.perusahaan.logo"
-                :perusahaan		="item.perusahaan.nama_perusahaan"
-                :role			="item.role"
-                :lokasi			="item.lokasi"
-                :pengalaman		="`Tahun ${item.pengalaman_kerja}`"
-                :waktuTampil	="item.tgl_selesai"
-                :deskripsi		="item.deskripsi"
-                ></LokerCard>
+                <div class="col-span-12 gap-4 text-center" v-if="lokerIsEmpty">
+                    <p> - Tidak ada loker yang berlaku - </p>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
+                    <LokerCard v-for="item in lokerItems" :key="item.judul"
+                    :judul			="item.judul"
+                    :linkLoker		="`loker/${item.slug}`"
+                    :img			="this.default.img + item.perusahaan.logo"
+                    :perusahaan		="item.perusahaan.nama_perusahaan"
+                    :role			="item.role"
+                    :lokasi			="item.lokasi"
+                    :pengalaman		="`Tahun ${item.pengalaman_kerja}`"
+                    :waktuTampil	="item.tgl_selesai"
+                    :deskripsi		="item.deskripsi"
+                    ></LokerCard>
+                </div>
             </div>
 
         </div>
@@ -231,16 +233,17 @@ export default {
         // title() {
         //     document.title = 'ANTEK HUB | Beranda';
         // },
-        getLoker() {
+        async getLoker() {
             const today = new Date();
-            axios.get('loker?limit=4').then(response => {
-                this.lokerItems     = response.data.data.data.filter((event) => {
-                    const eventEndDate = new Date(event.tgl_selesai);
-                    return eventEndDate >= today;
+            await axios.get('loker?limit=6').then(response => {
+                this.lokerItems     = response.data.data.data.filter((loker) => {
+                    const lokerEndDate = new Date(loker.tgl_selesai);
+                    return lokerEndDate >= today;
                 });
-                if (this.lokerItems == 0) {
+                if (this.lokerItems.length == 0) {
                     this.lokerIsEmpty = true
                 }
+                this.totalRecords   = this.lokerItems.total
                 this.lokerIsloading = false;
             }).catch(err => {
                 console.log(err)
