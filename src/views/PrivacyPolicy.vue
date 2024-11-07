@@ -3,7 +3,7 @@
 		<div class="col-span-12 flex flex-col gap-2">
 			<!-- static -->
 			<div class="flex justify-between items-center mb-10">
-				<p class="text-3xl font-semibold">Privacy Policy</p>
+				<p class="text-3xl font-semibold">{{ checked ? 'Privacy Policy' : 'Kebijakan Privasi' }}</p>
 				<div class="flex items-center gap-2">
 					<p>Ganti Bahasa / Change Language</p>
 					<ToggleButton v-model="checked" class="w-24 h-12" onLabel="EN" offLabel="ID" />
@@ -26,7 +26,6 @@ export default {
 			privacyPolicy: {
 				bahasa: 'ID',
 				konten: `
-					<h1 class="text-3xl">Kebijakan Privasi</h1>
 					<p>Terakhir diperbarui: 04 November 2024</p>
 					<p>Kebijakan Privasi ini menjelaskan kebijakan dan prosedur Kami terkait pengumpulan, penggunaan, dan pengungkapan informasi Anda saat Anda menggunakan Layanan, serta memberi tahu Anda tentang hak-hak privasi Anda dan bagaimana hukum melindungi Anda.</p>
 					<p>Kami menggunakan data pribadi Anda untuk menyediakan dan meningkatkan Layanan. Dengan menggunakan Layanan, Anda menyetujui pengumpulan dan penggunaan informasi sesuai dengan Kebijakan Privasi ini. Kebijakan Privasi ini dibuat dengan bantuan <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
@@ -130,7 +129,6 @@ export default {
 			privacyPolicyEN: {
 				bahasa: 'EN',
 				konten: `
-					<h1 class="text-3xl">Privacy Policy</h1>
 					<p>Last updated: November 04, 2024</p>
 					<p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
 					<p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
