@@ -13,6 +13,7 @@
 
         <div v-else class="col-span-12">
             <VueFlux
+                v-show="!rscs"
                 :options="options"
                 :rscs="rscs"
                 :transitions="transitions"
@@ -62,7 +63,7 @@
         </div>
 
         <!-- Berita Kategori -->
-        <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3">
+        <div class="col-span-12 flex overflow-x-auto bg-scroll wrapper-kategori gap-3">
             <div v-if="kategoriIsLoading" class="col-span-12 flex gap-4">
                 <Skeleton v-for="item in kategoriSkeletons" :key="item" width="10rem" height="3rem"></Skeleton>
             </div>
@@ -73,7 +74,7 @@
 				:endpointBerita ="kategori.slug"
 				:urlKategori    ="`berita?kategori=${kategori.slug}`"
 				:isSelected     ="selectedCategory === kategori.slug"
-				@pilihKategori	=	"() => pilihKategori(kategori.slug)"
+				@pilihKategori	="() => pilihKategori(kategori.slug)"
 			></Kategori>
         </div>
 
@@ -326,6 +327,14 @@ export default {
 </script>
 
 <style>
+    .wrapper-kategori {
+        scrollbar-width: none; /* Untuk Firefox */
+        -ms-overflow-style: none; /* Untuk Internet Explorer */
+    }
+
+    .wrapper-kategori::-webkit-scrollbar {
+        display: none; /* Untuk Chrome, Safari, dan Edge */
+    }
     .p-galleria-caption {
         background: none;
         top: 0;
