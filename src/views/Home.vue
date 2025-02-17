@@ -13,6 +13,7 @@
 
         <div v-else class="col-span-12">
             <VueFlux
+                v-show="!rscs"
                 :options="options"
                 :rscs="rscs"
                 :transitions="transitions"
@@ -62,7 +63,7 @@
         </div>
 
         <!-- Berita Kategori -->
-        <div class="col-span-12 flex overflow-y-auto wrapper-kategori gap-3">
+        <div class="col-span-12 flex overflow-x-auto bg-scroll wrapper-kategori gap-3">
             <div v-if="kategoriIsLoading" class="col-span-12 flex gap-4">
                 <Skeleton v-for="item in kategoriSkeletons" :key="item" width="10rem" height="3rem"></Skeleton>
             </div>
@@ -73,7 +74,7 @@
 				:endpointBerita ="kategori.slug"
 				:urlKategori    ="`berita?kategori=${kategori.slug}`"
 				:isSelected     ="selectedCategory === kategori.slug"
-				@pilihKategori	=	"() => pilihKategori(kategori.slug)"
+				@pilihKategori	="() => pilihKategori(kategori.slug)"
 			></Kategori>
         </div>
 
@@ -149,17 +150,24 @@
             </div>
 
             <!-- MAIN -->
-            <LokerCard v-for="item in lokerItems" :key="item.judul"
-                :judul			="item.judul"
-                :linkLoker		="`loker/${item.slug}`"
-                :img			="this.default.img + item.perusahaan.logo"
-                :perusahaan		="item.perusahaan.nama_perusahaan"
-                :role			="item.role"
-                :lokasi			="item.lokasi"
-                :pengalaman		="`Tahun ${item.pengalaman_kerja}`"
-                :waktuTampil	="item.tgl_selesai"
-                :deskripsi		="item.deskripsi"
-            ></LokerCard>
+            <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
+                <div class="col-span-12 gap-4 text-center" v-if="lokerIsEmpty">
+                    <p> - Tidak ada loker yang berlaku - </p>
+                </div>
+                <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
+                    <LokerCard v-for="item in lokerItems" :key="item.judul"
+                    :judul			="item.judul"
+                    :linkLoker		="`loker/${item.slug}`"
+                    :img			="this.default.img + item.perusahaan.logo"
+                    :perusahaan		="item.perusahaan.nama_perusahaan"
+                    :role			="item.role"
+                    :lokasi			="item.lokasi"
+                    :pengalaman		="`Tahun ${item.pengalaman_kerja}`"
+                    :waktuTampil	="item.tgl_selesai"
+                    :deskripsi		="item.deskripsi"
+                    ></LokerCard>
+                </div>
+            </div>
 
         </div>
 
@@ -211,6 +219,7 @@ export default {
             lokerItems      : [],
             lokerSkeletons  : 4,
             lokerIsloading  : true,
+            lokerIsEmpty    : false,
 
             pageMeta: {
                 title: 'ANTEK HUB | Beranda',
@@ -225,9 +234,17 @@ export default {
         // title() {
         //     document.title = 'ANTEK HUB | Beranda';
         // },
-        getLoker() {
-            axios.get('loker?limit=4').then(response => {
-                this.lokerItems = (response.data.data.data);
+        async getLoker() {
+            const today = new Date();
+            await axios.get('loker?limit=6').then(response => {
+                this.lokerItems     = response.data.data.data.filter((loker) => {
+                    const lokerEndDate = new Date(loker.tgl_selesai);
+                    return lokerEndDate >= today;
+                });
+                if (this.lokerItems.length == 0) {
+                    this.lokerIsEmpty = true
+                }
+                this.totalRecords   = this.lokerItems.total
                 this.lokerIsloading = false;
             }).catch(err => {
                 console.log(err)
@@ -310,6 +327,14 @@ export default {
 </script>
 
 <style>
+    .wrapper-kategori {
+        scrollbar-width: none; /* Untuk Firefox */
+        -ms-overflow-style: none; /* Untuk Internet Explorer */
+    }
+
+    .wrapper-kategori::-webkit-scrollbar {
+        display: none; /* Untuk Chrome, Safari, dan Edge */
+    }
     .p-galleria-caption {
         background: none;
         top: 0;

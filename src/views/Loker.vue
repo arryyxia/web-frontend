@@ -44,17 +44,23 @@
 
             <!-- MAIN -->
             <div v-else class="col-span-12 grid grid-cols-12 gap-4">
-                <LokerCard v-for="item in lokerItems.data" :key="item.id_loker"
-                    :judul          ="item.judul"
-                    :linkLoker      ="`loker/${item.slug}`"
-                    :img            ="this.default.img + item.perusahaan.logo"
-                    :perusahaan     ="item.perusahaan.nama_perusahaan"
-                    :role           ="item.role"
-                    :lokasi         ="item.lokasi"
-                    :pengalaman     ="`Tahun ${item.pengalaman_kerja}`"
-                    :waktuTampil    ="item.tgl_selesai"
-                    :deskripsi      ="item.deskripsi"
-                ></LokerCard>
+                <div class="col-span-12 gap-4 text-center" v-if="lokerIsEmpty">
+                    <p> - Tidak ada loker yang berlaku - </p>
+                </div>
+
+                <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
+                    <LokerCard v-for="item in lokerItems" :key="item.id_loker"
+                        :judul          ="item.judul"
+                        :linkLoker      ="`loker/${item.slug}`"
+                        :img            ="this.default.img + item.perusahaan.logo"
+                        :perusahaan     ="item.perusahaan.nama_perusahaan"
+                        :role           ="item.role"
+                        :lokasi         ="item.lokasi"
+                        :pengalaman     ="`Tahun ${item.pengalaman_kerja}`"
+                        :waktuTampil    ="item.tgl_selesai"
+                        :deskripsi      ="item.deskripsi"
+                    ></LokerCard>
+                </div>
 
                 <!-- Pagination -->
                 <div class="col-span-12 bg-white shadow-md rounded-md p-3 flex justify-center">
@@ -83,6 +89,7 @@ export default {
             endpointLoker   : 'https://api.antekhub.com/api/public/loker?limit=6',
             lokerSkeletons  : 6,
             lokerIsloading  : true,
+            lokerIsEmpty    : false,
 
             // Pagination
             pagination      : [],
@@ -103,9 +110,16 @@ export default {
         // title() {
         //     document.title = 'ANTEK HUB | Loker';
         // },
-        getLoker () {
-            axios.get('loker?limit=6').then(response => { 
-                this.lokerItems     = (response.data.data);
+        async getLoker() {
+            const today = new Date();
+            await axios.get('loker?limit=6').then(response => {
+                this.lokerItems     = response.data.data.data.filter((loker) => {
+                    const lokerEndDate = new Date(loker.tgl_selesai);
+                    return lokerEndDate >= today;
+                });
+                if (this.lokerItems.length == 0) {
+                    this.lokerIsEmpty = true
+                }
                 this.totalRecords   = this.lokerItems.total
                 this.lokerIsloading = false;
             }).catch(err => {

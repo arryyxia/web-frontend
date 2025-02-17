@@ -10,7 +10,7 @@ const routes = [
 
   // privacy-policy
   {
-    path: '/privacy-policy',
+    path: '/privacy-policy/en',
     name: 'privacy-policy',
     component: () => import('../views/PrivacyPolicy.vue')
   },
@@ -75,7 +75,14 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { top: 0 };
+    }
+  }
 })
 
 export default router

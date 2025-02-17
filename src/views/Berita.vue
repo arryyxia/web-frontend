@@ -17,7 +17,7 @@
 				:endpointBerita ="kategori.slug"
 				:urlKategori    ="`berita?kategori=${kategori.slug}`"
 				:isSelected     ="selectedCategory === kategori.slug"
-				@pilihKategori	=	"() => pilihKategori(kategori.slug)"
+				@pilihKategori	="() => pilihKategori(kategori.slug)"
 			></Kategori>
         </div>
 
@@ -85,7 +85,7 @@ export default {
             pageTitle : '',
             // ? News
             beritaItems     : [],
-            endpointBerita  : 'https://api.antekhub.com/api/public/berita?limit=6',
+            endpointBerita  : 'berita',
             beritaSkeletons : 6,
             beritaIsLoading : true,
 
@@ -117,7 +117,7 @@ export default {
         //     this.pageTitle = 'ANTEK HUB | Berita';
         // },
         getBerita() {
-            axios.get('berita?limit=6').then(response => {
+            axios.get(`${this.endpointBerita}`).then(response => {
                 this.beritaItems = (response.data.data.data);
                 this.beritaIsLoading = false;
             }).catch(err => {
@@ -152,7 +152,6 @@ export default {
     },
     mounted() {
         this.getBerita();
-        // this.title();
         this.getKategori();
         useHead(this.pageMeta)
     },

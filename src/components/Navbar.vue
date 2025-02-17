@@ -71,27 +71,23 @@
                 <div v-for="item in menuItems" :key="item.label">
                     <RouterLink
                         :to="item.route"
+                        exactActiveClass="color-primary rounded-sm border-b-4 border-b-[#DC2626] text-[#DC2626]"
                         class="flex gap-2 items-center p-2 px-4 border-b-4 border-b-white transition-all font-medium text-lg rounded-sm hover:border-b-4 hover:border-b-[#DC2626] hover:text-[#DC2626]"
                     >
                         <i :class="item.icon"></i>
                         <h3>{{ item.label }}</h3>
                     </RouterLink>
                 </div>
-                <RouterLink 
-                    to="/privacy-policy" 
-                    class="flex gap-2 items-center p-2 px-4 border-b-4 border-b-white transition-all font-medium text-lg rounded-sm hover:border-b-4 hover:border-b-[#DC2626] hover:text-[#DC2626]"
-                >
-                    <i class="pi pi-shield"></i>
-                    <h3>Privacy Policy</h3>
-                </RouterLink>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile -->
     <nav class="shadow-md h-20 block lg:hidden fixed bg-white w-full bottom-0 z-50">
         <!-- Menus -->
-        <div class="flex gap-4 items-center justify-around">
+        <div class="flex items-center justify-around">
             <div v-for="item in menuItems" :key="item.label">
-                <RouterLink :to="item.route" class="mobile w-24 flex flex-col gap-2 items-center pt-3 px-4 border-t-4 border-t-white transition-all font-medium text-lg rounded-sm hover:border-t-4 hover:border-t-[#DC2626] hover:text-[#DC2626]">
+                <RouterLink :to="item.route" class="mobile w-24 flex flex-col gap-2 items-center pt-3 border-t-4 border-t-white transition-all font-medium text-lg rounded-sm hover:border-t-4 hover:border-t-[#DC2626] hover:text-[#DC2626]">
                     <i :class="item.icon" class="text-2xl font-medium"></i>
                     <h3 class="font-medium">{{ item.label }}</h3>
                 </RouterLink>
