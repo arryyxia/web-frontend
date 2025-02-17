@@ -156,15 +156,15 @@
                 </div>
                 <div class="col-span-12 grid grid-cols-12 gap-4" v-else>
                     <LokerCard v-for="item in lokerItems" :key="item.judul"
-                    :judul			="item.judul"
-                    :linkLoker		="`loker/${item.slug}`"
-                    :img			="this.default.img + item.perusahaan.logo"
-                    :perusahaan		="item.perusahaan.nama_perusahaan"
-                    :role			="item.role"
-                    :lokasi			="item.lokasi"
-                    :pengalaman		="`Tahun ${item.pengalaman_kerja}`"
-                    :waktuTampil	="item.tgl_selesai"
-                    :deskripsi		="item.deskripsi"
+                        :judul			="item.judul"
+                        :linkLoker		="`loker/${item.slug}`"
+                        :img			="this.default.img + item.perusahaan.logo"
+                        :perusahaan		="item.perusahaan.nama_perusahaan"
+                        :role			="item.role"
+                        :lokasi			="item.lokasi"
+                        :pengalaman		="`Tahun ${item.pengalaman_kerja}`"
+                        :waktuTampil	="item.tgl_selesai"
+                        :deskripsi		="item.deskripsi"
                     ></LokerCard>
                 </div>
             </div>
@@ -303,6 +303,7 @@ export default {
 		pilihKategori(slug) {
 			this.selectedCategory   = this.selectedCategory === slug ? null : slug;
 			this.endpointBerita     = this.selectedCategory ? 'berita?kategori=' + slug : 'berita';
+            this.beritaIsLoading    = true;
 			this.getBerita();
 		},
         hitungHari(tgl) {
