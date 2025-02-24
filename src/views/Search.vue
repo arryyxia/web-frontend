@@ -160,7 +160,7 @@ export default {
                 this.beritaORloker = this.$route.params.slug  
                 this.yangDicari = this.$route.query.search
                 this.searchItems = (res.data.data.data)
-                console.log(this.searchItems)
+                // console.log(this.searchItems)
                 this.isLoading = false
             })
         },

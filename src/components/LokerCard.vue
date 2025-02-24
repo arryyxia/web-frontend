@@ -26,7 +26,8 @@
                     </div>
                     <div class="flex gap-2 items-center">
                         <i class="pi pi-calendar"></i>
-                        <span>{{ `${hitungHari(waktuTampil)} hari lagi` }}</span>
+                        <!-- <span>{{ `${hitungHari(waktuTampil)} hari lagi` }}</span> -->
+                        <span>{{ hitungHari(waktuTampil) === 0 ? 'Tidak Berlaku' : `${hitungHari(waktuTampil)} hari lagi` }}</span>
                     </div>
                 </div>
                 <!-- Deskripsi -->
