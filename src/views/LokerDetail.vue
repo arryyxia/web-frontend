@@ -66,7 +66,7 @@
                     </div>
                     <div class="flex gap-2 items-center">
                         <i class="pi pi-calendar"></i>
-                        <span>{{ `${hitungHari(konten.tgl_selesai)} hari lagi` }}</span>
+                        <span>{{ hitungHari(konten.tgl_selesai) === 0 ? 'Tidak Tersedia' : `${hitungHari(konten.tgl_selesai)} hari lagi` }}</span>
                     </div>
                 </div>
 
