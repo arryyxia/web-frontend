@@ -13,7 +13,7 @@
 
         <div v-else class="col-span-12">
             <VueFlux
-                v-show="!rscs"
+                v-show="rscs && rscs.length"
                 :options="options"
                 :rscs="rscs"
                 :transitions="transitions"
@@ -321,7 +321,7 @@ export default {
         this.getBerita();
         this.getKategori();
         this.getEvent();
-        // this.title();
+        console.log(this.rscs);
         useHead(this.pageMeta)
     },
 }
